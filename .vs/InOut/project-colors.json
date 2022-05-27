@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a92a1bdb-7c8c-493d-8162-00ccd3507ccc": {
+      "ProjectGuid": "a92a1bdb-7c8c-493d-8162-00ccd3507ccc",
+      "DisplayName": "InOut.Domain",
+      "ColorIndex": 0
+    },
+    "d2b66d94-c2f5-4950-97b4-a6dbfede706e": {
+      "ProjectGuid": "d2b66d94-c2f5-4950-97b4-a6dbfede706e",
+      "DisplayName": "InOut.Common",
+      "ColorIndex": 1
+    },
+    "852e1b9e-557c-4b8d-a5c2-d31c583da9ae": {
+      "ProjectGuid": "852e1b9e-557c-4b8d-a5c2-d31c583da9ae",
+      "DisplayName": "InOut.Service",
+      "ColorIndex": 2
+    },
+    "3051a433-a2e9-4d5c-91fd-9505a20870ac": {
+      "ProjectGuid": "3051a433-a2e9-4d5c-91fd-9505a20870ac",
+      "DisplayName": "InOut.Infrastructure",
+      "ColorIndex": 3
+    },
+    "f839358a-f89e-4598-8f94-5ef5a6c87e52": {
+      "ProjectGuid": "f839358a-f89e-4598-8f94-5ef5a6c87e52",
+      "DisplayName": "InOut.IoC",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

@@ -1,0 +1,12 @@
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\bin\Debug\net6.0\InOut.Service.deps.json
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\bin\Debug\net6.0\InOut.Service.dll
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\bin\Debug\net6.0\ref\InOut.Service.dll
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\bin\Debug\net6.0\InOut.Service.pdb
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.AssemblyInfoInputs.cache
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.AssemblyInfo.cs
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.csproj.CoreCompileInputs.cache
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.dll
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\ref\InOut.Service.dll
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.pdb
+C:\Users\arthu\source\repos\InOut\src\InOut.Service\obj\Debug\net6.0\InOut.Service.csproj.AssemblyReference.cache

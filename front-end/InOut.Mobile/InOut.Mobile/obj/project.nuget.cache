@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "gxGu2McEaTlOkOsQw0wdHWwMN1caf2A9m9+qp2sJuXkklf3+VG1NMrcd+1y/SEvNbIs36Ctodg6+EF6UNbVufQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Mobile\\InOut.Mobile\\InOut.Mobile.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\arthu\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
