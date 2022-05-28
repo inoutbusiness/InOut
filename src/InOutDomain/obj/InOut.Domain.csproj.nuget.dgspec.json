@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {}
+    "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
+    "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+        "projectUniqueName": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
         "projectName": "InOut.Domain",
-        "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
-        "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\obj\\",
+        "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+        "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
+        "outputPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
