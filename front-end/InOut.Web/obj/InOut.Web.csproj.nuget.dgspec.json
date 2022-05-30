@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj": {}
+    "D:\\WorkSpace\\Vs\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj": {
+    "D:\\WorkSpace\\Vs\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj",
+        "projectUniqueName": "D:\\WorkSpace\\Vs\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj",
         "projectName": "InOut.Web",
-        "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj",
-        "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\front-end\\InOut.Web\\obj\\",
+        "projectPath": "D:\\WorkSpace\\Vs\\InOut\\front-end\\InOut.Web\\InOut.Web.csproj",
+        "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
+        "outputPath": "D:\\WorkSpace\\Vs\\InOut\\front-end\\InOut.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
