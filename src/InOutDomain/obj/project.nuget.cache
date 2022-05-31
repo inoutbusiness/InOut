@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jSGBFoBTrs8+Kz8WwjX9K4zm66iCRuaySiIA8yu7ARSu1Uii3NbSAXOsbCx6SJj/XqLprUj6HlmkRELVtRzoOA==",
+  "dgSpecHash": "fK8c2PdETgQ6JmIUdijvKs0N4CCFirrre9urKAoyC0YlAW5J7HTphR1dNXRRRd2xSGemALvk1e03ys2yT/ouZA==",
   "success": true,
-  "projectFilePath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+  "projectFilePath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mathe\\.nuget\\packages\\fluentvalidation\\11.0.0\\fluentvalidation.11.0.0.nupkg.sha512"
+    "C:\\Users\\arthu\\.nuget\\packages\\fluentvalidation\\11.0.0\\fluentvalidation.11.0.0.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\libsodium\\1.0.18.2\\libsodium.1.0.18.2.nupkg.sha512",
+    "C:\\Users\\arthu\\.nuget\\packages\\nsec.cryptography\\22.4.0\\nsec.cryptography.22.4.0.nupkg.sha512"
   ],
   "logs": []
 }
