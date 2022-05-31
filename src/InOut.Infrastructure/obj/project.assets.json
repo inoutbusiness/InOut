@@ -20,6 +20,43 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
+      "libsodium/1.0.18.2": {
+        "type": "package",
+        "runtimeTargets": {
+          "runtimes/linux-arm/native/libsodium.so": {
+            "assetType": "native",
+            "rid": "linux-arm"
+          },
+          "runtimes/linux-arm64/native/libsodium.so": {
+            "assetType": "native",
+            "rid": "linux-arm64"
+          },
+          "runtimes/linux-musl-x64/native/libsodium.so": {
+            "assetType": "native",
+            "rid": "linux-musl-x64"
+          },
+          "runtimes/linux-x64/native/libsodium.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-arm64/native/libsodium.dylib": {
+            "assetType": "native",
+            "rid": "osx-arm64"
+          },
+          "runtimes/osx-x64/native/libsodium.dylib": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/libsodium.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libsodium.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -415,6 +452,18 @@
           }
         }
       },
+      "NSec.Cryptography/22.4.0": {
+        "type": "package",
+        "dependencies": {
+          "libsodium": "[1.0.18.2, 1.0.19)"
+        },
+        "compile": {
+          "lib/net5.0/NSec.Cryptography.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/NSec.Cryptography.dll": {}
+        }
+      },
       "System.Collections.Immutable/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -641,11 +690,23 @@
           }
         }
       },
+      "InOut.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/InOut.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InOut.Common.dll": {}
+        }
+      },
       "InOut.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "FluentValidation": "11.0.0"
+          "FluentValidation": "11.0.0",
+          "InOut.Common": "1.0.0",
+          "NSec.Cryptography": "22.4.0"
         },
         "compile": {
           "bin/placeholder/InOut.Domain.dll": {}
@@ -692,6 +753,28 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "libsodium/1.0.18.2": {
+      "sha512": "flArHoVdscSzyV8ZdPV+bqqY2TTFlaN+xZf/vIqsmHI51KVcD/mOdUPaK3n/k/wGKz8dppiktXUqSmf3AXFgig==",
+      "type": "package",
+      "path": "libsodium/1.0.18.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AUTHORS",
+        "ChangeLog",
+        "LICENSE",
+        "libsodium.1.0.18.2.nupkg.sha512",
+        "libsodium.nuspec",
+        "runtimes/linux-arm/native/libsodium.so",
+        "runtimes/linux-arm64/native/libsodium.so",
+        "runtimes/linux-musl-x64/native/libsodium.so",
+        "runtimes/linux-x64/native/libsodium.so",
+        "runtimes/osx-arm64/native/libsodium.dylib",
+        "runtimes/osx-x64/native/libsodium.dylib",
+        "runtimes/win-x64/native/libsodium.dll",
+        "runtimes/win-x86/native/libsodium.dll"
       ]
     },
     "Microsoft.CSharp/4.5.0": {
@@ -1410,6 +1493,22 @@
         "version.txt"
       ]
     },
+    "NSec.Cryptography/22.4.0": {
+      "sha512": "lEntcPYd7h3aZ8xxi/y/4TML7o8w0GEGqd+w4L1omqFLbdCBmhxJAeO2YBmv/fXbJKgKCQLm7+TD4bR605PEUQ==",
+      "type": "package",
+      "path": "nsec.cryptography/22.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NOTICE",
+        "lib/net5.0/NSec.Cryptography.dll",
+        "lib/netstandard2.1/NSec.Cryptography.dll",
+        "nsec.cryptography.22.4.0.nupkg.sha512",
+        "nsec.cryptography.nuspec",
+        "nsec.png"
+      ]
+    },
     "System.Collections.Immutable/6.0.0": {
       "sha512": "l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
       "type": "package",
@@ -1894,6 +1993,11 @@
         "version.txt"
       ]
     },
+    "InOut.Common/1.0.0": {
+      "type": "project",
+      "path": "../InOut.Common/InOut.Common.csproj",
+      "msbuildProject": "../InOut.Common/InOut.Common.csproj"
+    },
     "InOut.Domain/1.0.0": {
       "type": "project",
       "path": "../InOutDomain/InOut.Domain.csproj",
@@ -1910,23 +2014,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mathe\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\arthu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
       "projectName": "InOut.Infrastructure",
-      "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-      "outputPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1940,8 +2040,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
-              "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj"
+            "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
+              "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj"
             }
           }
         }
@@ -1992,7 +2092,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

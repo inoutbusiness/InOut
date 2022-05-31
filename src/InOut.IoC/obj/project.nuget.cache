@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pgnj8MxqSFoCNAImpF1Hx+GZR+zfnBV0/t2o1SDDXhmg3Tp5Rth2DZDxJJfB7MJQtBhImZL2BqMwkBFDKPcXwg==",
+  "dgSpecHash": "d5jwXHJQZF1Mn85bQydVGFRpMbGVcN9rufd9jya61S3DYF4f0aSXCCjMYoz81TgSwPHVRzw5zXyRHVYVQd28wA==",
   "success": true,
-  "projectFilePath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.IoC\\InOut.IoC.csproj",
+  "projectFilePath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.IoC\\InOut.IoC.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

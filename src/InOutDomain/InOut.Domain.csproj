@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.0.0" />
+    <PackageReference Include="NSec.Cryptography" Version="22.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InOut.Common\InOut.Common.csproj" />
   </ItemGroup>
 
 </Project>

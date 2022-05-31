@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InOut.Domain", "src\InOutDo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{3CF8DF1A-2394-4D33-9027-BB88CBAF5380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InOut.API", "api\InOut.API\InOut.API.csproj", "{D439F88D-5729-4BEF-AE1B-D3BFB2EAF488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InOut.API", "api\InOut.API\InOut.API.csproj", "{D439F88D-5729-4BEF-AE1B-D3BFB2EAF488}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InOut.API.Tests", "InOut.API.Tests", "{531BE479-D63B-42F8-96B8-7201B01A8A18}"
 EndProject
@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InOut.Source.Tests", "InOut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestUtilities", "TestUtilities", "{FAA81B33-E350-4363-9857-A18EAAFA5974}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Tests", "tests\Service.Tests\Service.Tests.csproj", "{62F64608-102B-4356-A58D-13EC0BA4E935}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Tests", "tests\Service.Tests\Service.Tests.csproj", "{62F64608-102B-4356-A58D-13EC0BA4E935}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

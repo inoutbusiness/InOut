@@ -1,23 +1,74 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj": {}
+    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj": {
+    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\InOut.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
-        "projectName": "InOut.Infrastructure",
-        "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-        "outputPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOut.Infrastructure\\obj\\",
+        "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\InOut.Common.csproj",
+        "projectName": "InOut.Common",
+        "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\InOut.Common.csproj",
+        "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
+        "projectName": "InOut.Infrastructure",
+        "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\InOut.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -31,8 +82,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
-                "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj"
+              "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
+                "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj"
               }
             }
           }
@@ -83,24 +134,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
+    "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
         "projectName": "InOut.Domain",
-        "projectPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
-        "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-        "outputPath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\obj\\",
+        "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+        "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arthu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -113,7 +161,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\InOut.Common.csproj": {
+                "projectPath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOut.Common\\InOut.Common.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -129,6 +181,10 @@
             "FluentValidation": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "NSec.Cryptography": {
+              "target": "Package",
+              "version": "[22.4.0, )"
             }
           },
           "imports": [
@@ -146,7 +202,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
