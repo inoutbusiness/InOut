@@ -1,0 +1,31 @@
+﻿using InOut.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace InOut.Infrastructure.Mappings
+{
+    public class ProviderMapping : IEntityTypeConfiguration<Provider>
+    {
+        public void Configure(EntityTypeBuilder<Provider> builder)
+        {
+            builder.ToTable("Providers");
+
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id)
+                .UseIdentityColumn()
+                .HasColumnType("BIGINT")
+                .ValueGeneratedOnAdd();
+
+            builder.Property(x => x.Name)
+                .HasColumnName("Name")
+                .HasColumnType("VARCHAR(50)")
+                .HasMaxLength(50);
+
+            builder.Property(x => x.CNPJ)
+                .HasColumnName("CPNJ")
+                .HasColumnType("VARCHAR(18)")
+                .HasMaxLength(18);
+        }
+    }
+}

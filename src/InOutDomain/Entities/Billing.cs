@@ -4,11 +4,8 @@
     {
         public decimal Value { get; set; }
 
-        public User Customer { get; set; }
         public long CustomerId { get; set; }
-
-        public Coupom Coupom { get; set; }
-        public long CoupomId { get; set; }
+        public User Customer { get; set; }
 
         public ICollection<Product> Products { get; set; }
 

@@ -7,7 +7,7 @@ namespace InOut.Domain.Validators
     {
         public UserValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.FirstName)
                 .NotNull()
                 .WithMessage("O nome não pode ser nulo")
                 .NotEmpty()

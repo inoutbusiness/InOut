@@ -17,20 +17,32 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("BIGINT")
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Name)
-                .HasColumnName("Name")
-                .HasColumnType("VARCHAR(120)")
-                .HasMaxLength(120);
+            builder.Property(x => x.FirstName)
+                .IsRequired()
+                .HasColumnName("FirstName")
+                .HasColumnType("VARCHAR(60)")
+                .HasMaxLength(60);
+
+            builder.Property(x => x.FirstName)
+                .IsRequired()
+                .HasColumnName("LastName")
+                .HasColumnType("VARCHAR(60)")
+                .HasMaxLength(60);
+
+            builder.Property(x => x.CpfCnpj)
+                .IsRequired()
+                .HasColumnName("CpfCnpj")
+                .HasColumnType("VARCHAR(14)")
+                .HasMaxLength(14);
 
             builder.Property(x => x.Phone)
+                .IsRequired()
                 .HasColumnName("Phone")
                 .HasColumnType("VARCHAR(13)")
                 .HasMaxLength(13);
 
-            builder.Property(x => x.CpfCnpj)
-                .HasColumnName("CpfCnpj")
-                .HasColumnType("VARCHAR(14)")
-                .HasMaxLength(14);
+            builder.Property(x => x.Phone)
+                .IsRequired();
         }
     }
 }
