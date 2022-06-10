@@ -1,22 +1,24 @@
 ﻿using InOut.Domain.Entities;
 using InOut.Infrastructure.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace InOut.Infrastructure.Context
 {
     public class InOutContext : DbContext
     {
-        public InOutContext(DbContextOptions<InOutContext> options)
-            : base(options)
-        { }
+        private readonly IConfiguration _configuration;
+
+        public InOutContext(IConfiguration configuration)
+        {
+            this._configuration = configuration;
+        }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Billing> Billings { get; set; }
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Coupom> Coupons { get; set; }
-
         public DbSet<BusinessBilling> BusinessBillings { get; set; }
         public DbSet<UserBusiness> UserBusinesses { get; set; }
 
@@ -29,6 +31,11 @@ namespace InOut.Infrastructure.Context
             modelBuilder.ApplyConfiguration(new ProductMapping());
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:DefaultConnection"]);
         }
     }
 }

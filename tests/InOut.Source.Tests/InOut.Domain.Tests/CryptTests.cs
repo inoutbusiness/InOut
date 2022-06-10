@@ -1,38 +1,39 @@
 using InOut.Domain.Entities;
 using InOut.Domain.Enums;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Xunit;
+using Assert = Xunit.Assert;
 
 namespace InOut.Domain.Tests
 {
-    [TestClass]
     public class CryptTests
     {
-        [TestMethod]
-        public void Encrypt_ValidString_EncryptPassword()
+        [Fact]
+        public void Encrypt_ValidString_EncryptEmail()
         {
             // Arrange
-            var passwordToEncryot = "MyPassword101";
+            var emailToEncryot = "myEmail@gmail.com";
             var crypt = new Crypt();
 
             // Act
-            var result = crypt.Encrypt(passwordToEncryot, EEncryptionType.Password);
+            var result = crypt.Encrypt(emailToEncryot, EEncryptionType.Email);
 
             // Assert
         }
 
-        [TestMethod]
-        public void Encrypt_NullString_EncryptPassword()
+        [Fact]
+        public void Encrypt_NullString_EncryptEmail()
         {
             // Arrange
-            string passwordToEncryot = null;
+            string emailToEncryot = null;
             var crypt = new Crypt();
 
             // Act
-            Action action = () => crypt.Encrypt(passwordToEncryot, EEncryptionType.Password);
+            var act = () => crypt.Encrypt(emailToEncryot, EEncryptionType.Email);
 
             // Assert
-            Assert.ThrowsException(action);
+            var exception = Assert.Throws<Exception>(act);
+            Assert.Contains("Ocorreu um erro ao encriptografar um(a)", exception.Message);
         }
     }
 }
