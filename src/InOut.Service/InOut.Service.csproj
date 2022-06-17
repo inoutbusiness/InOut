@@ -10,4 +10,8 @@
     <ProjectReference Include="..\InOut.Infrastructure\InOut.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO%27s\" />
+  </ItemGroup>
+
 </Project>

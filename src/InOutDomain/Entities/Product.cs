@@ -14,11 +14,13 @@ namespace InOut.Domain.Entities
         public EUnitOfMeasurement UnitOfMeasurement { get; set; }
         public EProductType Type { get; set; }
 
-        public long ProductGroupId { get; set; }
-        public ProductGroup ProductGroup { get; set; }
 
-        public long BillingId { get; set; }
-        public Billing Billing { get; set; }
+        public long InventoryId { get; set; }
+        public Inventory Inventory { get; set; }
+
+
+        public ICollection<ProductProvider> ProductProviders { get; set; }
+        public ICollection<Movement> Movements { get; set; }
 
         public override void Validate()
         {

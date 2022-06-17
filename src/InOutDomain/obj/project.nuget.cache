@@ -1,12 +1,26 @@
 {
   "version": 2,
-  "dgSpecHash": "fK8c2PdETgQ6JmIUdijvKs0N4CCFirrre9urKAoyC0YlAW5J7HTphR1dNXRRRd2xSGemALvk1e03ys2yT/ouZA==",
+  "dgSpecHash": "oMw53yQ3sESTc2k8sXp/DM2CB6chFX0+ImKlQO5aZuBxZth0yXuhpC4OqyztK1gWUbBu9hRlBULeV2vPTjr3hA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\arthu\\source\\repos\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
+  "projectFilePath": "D:\\WorkSpace\\Vs\\InOut\\src\\InOutDomain\\InOut.Domain.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\arthu\\.nuget\\packages\\fluentvalidation\\11.0.0\\fluentvalidation.11.0.0.nupkg.sha512",
-    "C:\\Users\\arthu\\.nuget\\packages\\libsodium\\1.0.18.2\\libsodium.1.0.18.2.nupkg.sha512",
-    "C:\\Users\\arthu\\.nuget\\packages\\nsec.cryptography\\22.4.0\\nsec.cryptography.22.4.0.nupkg.sha512"
+    "C:\\Users\\mathe\\.nuget\\packages\\fluentvalidation\\11.0.3\\fluentvalidation.11.0.3.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\libsodium\\1.0.18.2\\libsodium.1.0.18.2.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.5\\microsoft.entityframeworkcore.6.0.5.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.5\\microsoft.entityframeworkcore.abstractions.6.0.5.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.5\\microsoft.entityframeworkcore.analyzers.6.0.5.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\nsec.cryptography\\22.4.0\\nsec.cryptography.22.4.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\mathe\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

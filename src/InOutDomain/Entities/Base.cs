@@ -25,5 +25,6 @@ namespace InOut.Domain.Entities
 
         private void ThrowException()
             => throw new Exception(string.Join(';', _errors));
+
     }
 }

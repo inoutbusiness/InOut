@@ -1,5 +1,5 @@
-﻿using InOut.Common.Exceptions;
-using InOut.Domain.Enums;
+﻿using InOut.Domain.Enums;
+using InOut.Domain.Exceptions;
 using InOut.Domain.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,7 +16,6 @@ namespace InOut.Domain.Entities
                 byte[] encryptionTypeBytes = Encoding.UTF8.GetBytes(encryptionType.ToString());
                 byte[] encryptedBytes = null;
                 byte[] saltBytes = new byte[] { 2, 1, 7, 3, 6, 4, 8, 5 };
-
                 using (MemoryStream ms = new MemoryStream())
                 {
                     using (var AES = new RijndaelManaged())
@@ -45,6 +44,7 @@ namespace InOut.Domain.Entities
             {
                 throw new CryptException($"Ocorreu um erro ao encriptografar um(a) {encryptionType.ToString()}", ex);
             }
+
         }
 
         public string Decrypt(byte[] valueToDecrypt, EEncryptionType encryptionType)
