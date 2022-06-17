@@ -18,11 +18,13 @@ namespace InOut.Infrastructure.Mappings
                 .ValueGeneratedOnAdd();
 
             builder.Property(x => x.Name)
+                .IsRequired()
                 .HasColumnName("Name")
                 .HasColumnType("VARCHAR(50)")
                 .HasMaxLength(50);
 
-            builder.Property(x => x.CNPJ)
+            builder.Property(x => x.Cnpj)
+                .IsRequired()
                 .HasColumnName("CPNJ")
                 .HasColumnType("VARCHAR(18)")
                 .HasMaxLength(18);

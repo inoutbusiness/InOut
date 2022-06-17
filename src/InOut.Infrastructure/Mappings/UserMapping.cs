@@ -41,8 +41,18 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("VARCHAR(13)")
                 .HasMaxLength(13);
 
-            builder.Property(x => x.Phone)
-                .IsRequired();
+            builder.Property(x => x.BirthDate)
+                .IsRequired()
+                .HasColumnName("BirthDate")
+                .HasColumnType("datetime2");
+
+            builder.HasOne<Account>(a => a.Account)
+                   .WithOne(b => b.User)
+                   .HasForeignKey<Account>(b => b.UserId);
+
+            builder.HasOne(a => a.Branch)
+                   .WithMany(b => b.Employees)
+                   .IsRequired();
         }
     }
 }
