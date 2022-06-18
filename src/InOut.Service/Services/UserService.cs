@@ -1,4 +1,6 @@
-﻿using InOut.Infrastructure.Repositories.Interfaces;
+﻿using InOut.Domain.Models.Auth;
+using InOut.Domain.Models.User;
+using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Services.Interfaces;
 
 namespace InOut.Service.Services
