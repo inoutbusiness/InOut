@@ -8,7 +8,6 @@
         public long ProviderId { get; set; }
         public Provider Provider { get; set; }
 
-
         public override void Validate()
         {
             throw new NotImplementedException();

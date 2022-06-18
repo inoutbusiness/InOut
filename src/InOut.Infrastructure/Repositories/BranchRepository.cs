@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class BranchRepository : BaseRepository<Branch>, IBranchRepository
     {
-        public BranchRepository(IInOutContext contextInOut) : base(contextInOut)
+        public BranchRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }

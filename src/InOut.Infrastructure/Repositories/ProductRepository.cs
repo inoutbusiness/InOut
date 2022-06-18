@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        public ProductRepository(IInOutContext contextInOut) : base(contextInOut)
+        public ProductRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }

@@ -33,7 +33,6 @@ namespace InOut.Infrastructure.Mappings
                    .WithOne(b => b.Branch)
                    .HasForeignKey<Branch>(b => b.LocationId);
 
-
             builder.HasMany(a => a.Employees)
                    .WithOne(b => b.Branch)
                    .HasForeignKey(b => b.BranchId);

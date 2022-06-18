@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class LocationRepository : BaseRepository<Location>, ILocationRepository
     {
-        public LocationRepository(IInOutContext contextInOut) : base(contextInOut)
+        public LocationRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }

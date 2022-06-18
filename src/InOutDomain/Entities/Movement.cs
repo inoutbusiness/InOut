@@ -10,7 +10,6 @@ namespace InOut.Domain.Entities
 
         public Product Product { get; set; }
 
-
         public ICollection<UserMovement> UserMovements { get; set; }
 
         public override void Validate()

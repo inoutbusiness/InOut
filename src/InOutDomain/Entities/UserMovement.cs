@@ -8,7 +8,6 @@
         public long MovementId { get; set; }
         public Movement Movement { get; set; }
 
-
         public override void Validate()
         {
             throw new NotImplementedException();

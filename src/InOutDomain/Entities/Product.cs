@@ -14,10 +14,8 @@ namespace InOut.Domain.Entities
         public EUnitOfMeasurement UnitOfMeasurement { get; set; }
         public EProductType Type { get; set; }
 
-
         public long InventoryId { get; set; }
         public Inventory Inventory { get; set; }
-
 
         public ICollection<ProductProvider> ProductProviders { get; set; }
         public ICollection<Movement> Movements { get; set; }

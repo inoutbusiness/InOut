@@ -8,7 +8,6 @@
         public string City { get; set; }
         public string District { get; set; }
 
-
         public Branch? Branch { get; set; }
 
         public override void Validate()

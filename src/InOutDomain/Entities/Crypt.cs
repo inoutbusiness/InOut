@@ -44,7 +44,6 @@ namespace InOut.Domain.Entities
             {
                 throw new CryptException($"Ocorreu um erro ao encriptografar um(a) {encryptionType.ToString()}", ex);
             }
-
         }
 
         public string Decrypt(byte[] valueToDecrypt, EEncryptionType encryptionType)
