@@ -15,10 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\src\InOut.IoC\InOut.IoC.csproj" />
     <ProjectReference Include="..\..\src\InOut.Service\InOut.Service.csproj" />
   </ItemGroup>
 

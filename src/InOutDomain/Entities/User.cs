@@ -1,4 +1,4 @@
-﻿    namespace InOut.Domain.Entities
+﻿namespace InOut.Domain.Entities
 {
     public class User : Base
     {
@@ -11,11 +11,8 @@
         public long AccountId { get; set; }
         public Account Account { get; set; }
 
-
         public long BranchId { get; set; }
         public Branch Branch { get; set; }
-
-
 
         public ICollection<UserMovement> UserMovements { get; set; }
         public ICollection<UserBusiness> UserBusinesses { get; set; }

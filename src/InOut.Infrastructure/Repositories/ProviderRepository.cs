@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class ProviderRepository : BaseRepository<Provider>, IProviderRepository
     {
-        public ProviderRepository(IInOutContext contextInOut) : base(contextInOut)
+        public ProviderRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }

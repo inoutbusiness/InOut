@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(IInOutContext contextInOut) : base(contextInOut)
+        public UserRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }

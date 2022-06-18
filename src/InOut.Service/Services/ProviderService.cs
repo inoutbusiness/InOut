@@ -4,6 +4,5 @@ namespace InOut.Service.Services
 {
     public class ProviderService : IProviderService
     {
-
     }
 }

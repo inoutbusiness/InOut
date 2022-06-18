@@ -5,7 +5,6 @@
         public long BranchId { get; set; }
         public Branch Branch { get; set; }
 
-
         public ICollection<Product> Products { get; set; }
 
         public override void Validate()

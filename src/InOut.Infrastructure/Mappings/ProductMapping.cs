@@ -72,7 +72,6 @@ namespace InOut.Infrastructure.Mappings
 
             builder.HasMany(a => a.Movements)
                    .WithOne(b => b.Product);
-
         }
     }
 }

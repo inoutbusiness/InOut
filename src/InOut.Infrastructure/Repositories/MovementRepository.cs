@@ -6,7 +6,7 @@ namespace InOut.Infrastructure.Repositories
 {
     public class MovementRepository : BaseRepository<Movement>, IMovementRepository
     {
-        public MovementRepository(IInOutContext contextInOut) : base(contextInOut)
+        public MovementRepository(IInOutContext inOutContext) : base(inOutContext)
         {
         }
     }
