@@ -1,5 +1,4 @@
 using InOut.Infrastructure.Context;
-using InOut.IoC;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.InjectIoCServices();
+//builder.Services.InjectIoCServices();
 
 builder.Services.AddDbContext<InOutContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("InOutDefaultConnection")), ServiceLifetime.Transient);
