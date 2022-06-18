@@ -1,18 +1,18 @@
 ﻿using InOut.Domain.Entities;
 using InOut.Infrastructure.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace InOut.Infrastructure.Context
 {
-    public class InOutContext : DbContext, IInOutContext
+    public class InOutContext : DbContext
     {
-        private readonly IConfiguration _configuration;
 
-        public InOutContext(IConfiguration configuration)
-        {
-            this._configuration = configuration;
-        }
+        public InOutContext(DbContextOptions<InOutContext> options)
+            : base(options)
+        { }
+
+        public InOutContext()
+        { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
@@ -41,11 +41,6 @@ namespace InOut.Infrastructure.Context
             modelBuilder.ApplyConfiguration(new ProductProviderMapping());
 
             base.OnModelCreating(modelBuilder);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:InOutDefaultConnection"]);
         }
     }
 }

@@ -7,9 +7,9 @@ namespace InOut.Infrastructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Base
     {
-        private readonly IInOutContext _inOutContext;
+        private readonly InOutContext _inOutContext;
 
-        public BaseRepository(IInOutContext inOutContext)
+        public BaseRepository(InOutContext inOutContext)
         {
             this._inOutContext = inOutContext;
         }

@@ -1,18 +1,17 @@
 using InOut.Infrastructure.Context;
+using InOut.IoC;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
-//builder.Services.InjectIoCServices();
+Injector.InjectIoCServices(builder.Services);
 
 builder.Services.AddDbContext<InOutContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("InOutDefaultConnection")), ServiceLifetime.Transient);
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -26,6 +25,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyHeader()
+      .AllowAnyMethod()
+      .WithOrigins("http://localhost:3000"));
 
 app.UseAuthorization();
 

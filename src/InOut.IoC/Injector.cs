@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace InOut.IoC
 {
-    public abstract class Injector
+    public static class Injector
     {
         public static void InjectIoCServices(IServiceCollection serviceColletion)
         {
@@ -14,26 +14,26 @@ namespace InOut.IoC
             InjectServices(serviceColletion);
         }
 
-        public static void InjectRepositories(IServiceCollection serviceColletion)
+        private static void InjectRepositories(IServiceCollection serviceColletion)
         {
-            serviceColletion.AddScoped<IAccountRepository, AccountRepository>();
-            serviceColletion.AddScoped<IBranchRepository, BranchRepository>();
-            serviceColletion.AddScoped<ILocationRepository, LocationRepository>();
-            serviceColletion.AddScoped<IMovementRepository, MovementRepository>();
-            serviceColletion.AddScoped<IProductRepository, ProductRepository>();
-            serviceColletion.AddScoped<IProviderRepository, ProviderRepository>();
-            serviceColletion.AddScoped<IUserRepository, UserRepository>();
+            serviceColletion.AddTransient<IAccountRepository, AccountRepository>();
+            serviceColletion.AddTransient<IBranchRepository, BranchRepository>();
+            serviceColletion.AddTransient<ILocationRepository, LocationRepository>();
+            serviceColletion.AddTransient<IMovementRepository, MovementRepository>();
+            serviceColletion.AddTransient<IProductRepository, ProductRepository>();
+            serviceColletion.AddTransient<IProviderRepository, ProviderRepository>();
+            serviceColletion.AddTransient<IUserRepository, UserRepository>();
         }
 
-        public static void InjectServices(IServiceCollection serviceColletion)
+        private static void InjectServices(IServiceCollection serviceColletion)
         {
-            serviceColletion.AddScoped<IAccountService, AccountService>();
-            serviceColletion.AddScoped<IBranchService, BranchService>();
-            serviceColletion.AddScoped<ILocationService, LocationService>();
-            serviceColletion.AddScoped<IMovementService, MovementService>();
-            serviceColletion.AddScoped<IProductService, ProductService>();
-            serviceColletion.AddScoped<IProviderService, ProviderService>();
-            serviceColletion.AddScoped<IUserService, UserService>();
+            serviceColletion.AddTransient<IAccountService, AccountService>();
+            serviceColletion.AddTransient<IBranchService, BranchService>();
+            serviceColletion.AddTransient<ILocationService, LocationService>();
+            serviceColletion.AddTransient<IMovementService, MovementService>();
+            serviceColletion.AddTransient<IProductService, ProductService>();
+            serviceColletion.AddTransient<IProviderService, ProviderService>();
+            serviceColletion.AddTransient<IUserService, UserService>();
         }
     }
 }
