@@ -5,7 +5,7 @@ namespace InOut.Infrastructure.Repositories.Interfaces
 {
     public interface IAccountRepository
     {
-        Task<bool> ExistsBySignInModel(SignInModel signInModel);
-        Task<Account> GetUserWithAccountBySignInModel(SignInModel signInModel);
+        Task<bool> ExistsByEmailAndPassword(string email, byte[] password);
+        Task<Account?> GetUserWithAccountByEmailAndPassword(string email, byte[] password);
     }
 }

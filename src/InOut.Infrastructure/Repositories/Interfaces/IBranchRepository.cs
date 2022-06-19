@@ -1,6 +1,8 @@
-﻿namespace InOut.Infrastructure.Repositories.Interfaces
+﻿using InOut.Domain.Entities;
+
+namespace InOut.Infrastructure.Repositories.Interfaces
 {
-    public interface IBranchRepository
+    public interface IBranchRepository : IBaseRepository<Branch>
     {
     }
 }

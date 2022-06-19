@@ -2,7 +2,7 @@
 
 namespace InOut.Domain.Interfaces
 {
-    internal interface ICrypt
+    public interface ICrypt
     {
         byte[] Encrypt(string valueToEncrypt, EEncryptionType encryptionType);
 

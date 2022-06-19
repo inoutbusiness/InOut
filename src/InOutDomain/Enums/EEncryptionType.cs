@@ -2,6 +2,7 @@
 {
     public enum EEncryptionType
     {
-        Email = 1
+        Email = 1,
+        Password = 2,
     }
 }

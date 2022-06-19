@@ -18,16 +18,6 @@ namespace InOut.Domain.Validators
                 .WithMessage("O email não pode ter mais de 180 caractéres.")
                 .Matches(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")
                 .WithMessage("Email inválido.");
-
-            RuleFor(x => x.Password)
-                .NotNull()
-                .WithMessage("A senha não pode ser nulo")
-                .NotEmpty()
-                .WithMessage("A senha não pode ser vázio.")
-                .MinimumLength(3)
-                .WithMessage("A senha deve ter no mínimo 3 caractéres.")
-                .MaximumLength(80)
-                .WithMessage("A senha não pode ter mais de 80 caractéres.");
         }
     }
 }

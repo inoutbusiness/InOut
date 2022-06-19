@@ -19,21 +19,19 @@ namespace InOut.Infrastructure.Repositories
         }
 
         #region Expressions
-        private Expression<Func<Account, bool>> ExpBySignInModel(SignInModel signInModel)
-            => w => w.Email.Equals(signInModel.Email) && w.Password.Equals(signInModel.Password);
+        private Expression<Func<Account, bool>> ExpBySignInModel(string email, byte[] password)
+            => w => w.Email.Equals(email) && w.Password.Equals(password);
         #endregion
 
         #region Public Methods
-        public async Task<bool> ExistsBySignInModel(SignInModel signInModel)
+        public async Task<bool> ExistsByEmailAndPassword(string email, byte[] password)
         {
-            return await _inOutContext.Accounts.AnyAsync(ExpBySignInModel(signInModel));
+            return await _inOutContext.Accounts.AnyAsync(ExpBySignInModel(email, password));
         }
 
-        public async Task<Account> GetUserWithAccountBySignInModel(SignInModel signInModel)
+        public async Task<Account?> GetUserWithAccountByEmailAndPassword(string email, byte[] password)
         {
-            return await _inOutContext.Accounts
-                                        .Include(x => x.User)
-                                            .FirstOrDefaultAsync(ExpBySignInModel(signInModel));
+            return await _inOutContext.Accounts.Include(x => x.User).FirstOrDefaultAsync(ExpBySignInModel(email, password));
         }
         #endregion
     }

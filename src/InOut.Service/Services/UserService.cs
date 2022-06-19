@@ -13,5 +13,10 @@ namespace InOut.Service.Services
         {
             _userRepository = userRepository;
         }
+
+        public Task<bool> ExistsByCpfCnpj(string cpfCnpj)
+        {
+            return _userRepository.ExistsByCpfCnpj(cpfCnpj);
+        }
     }
 }
