@@ -1,6 +1,9 @@
-﻿namespace InOut.Infrastructure.Repositories.Interfaces
+﻿using InOut.Domain.Entities;
+
+namespace InOut.Infrastructure.Repositories.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
+        Task<bool> ExistsByCpfCnpj(string cpfCnpj);
     }
 }

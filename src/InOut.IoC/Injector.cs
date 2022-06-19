@@ -1,8 +1,10 @@
-﻿using InOut.Infrastructure.Repositories;
+﻿using InOut.Domain.Entities;
+using InOut.Infrastructure.Repositories;
 using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Services;
 using InOut.Service.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using InOut.Domain.Interfaces;
 
 namespace InOut.IoC
 {
@@ -12,6 +14,7 @@ namespace InOut.IoC
         {
             InjectRepositories(serviceColletion);
             InjectServices(serviceColletion);
+            InjectGenerics(serviceColletion);
         }
 
         private static void InjectRepositories(IServiceCollection serviceColletion)
@@ -34,6 +37,11 @@ namespace InOut.IoC
             serviceColletion.AddTransient<IProductService, ProductService>();
             serviceColletion.AddTransient<IProviderService, ProviderService>();
             serviceColletion.AddTransient<IUserService, UserService>();
+        }
+
+        private static void InjectGenerics(IServiceCollection serviceColletion)
+        {
+            serviceColletion.AddTransient<ICrypt, Crypt>();
         }
     }
 }

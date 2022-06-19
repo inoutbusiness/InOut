@@ -2,5 +2,6 @@
 {
     public interface IUserService
     {
+        Task<bool> ExistsByCpfCnpj(string cpfCnpj);
     }
 }
