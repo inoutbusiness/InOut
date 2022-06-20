@@ -26,8 +26,8 @@ namespace InOut.Infrastructure.Mappings
             builder.Property(x => x.Cnpj)
                    .IsRequired()
                    .HasColumnName("Cnpj")
-                   .HasColumnType("VARCHAR(14)")
-                   .HasMaxLength(14);
+                   .HasColumnType("VARCHAR(18)")
+                   .HasMaxLength(18);
 
             builder.HasOne(a => a.Location)
                    .WithOne(b => b.Branch)

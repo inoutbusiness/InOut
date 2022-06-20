@@ -19,7 +19,8 @@ namespace InOut.Infrastructure.Repositories
 
         public async Task<bool> ExistsByCpfCnpj(string cpfCnpj)
         {
-            return await _inOutContext.Users.AnyAsync(ExpExistsByCpfCnpj(cpfCnpj));
+            return await _inOutContext.Users
+                                      .AnyAsync(ExpExistsByCpfCnpj(cpfCnpj));
         }
     }
 }

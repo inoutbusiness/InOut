@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20220619215537_changeTypeOfPasswordAndClearUserIdOnAccount")]
+    partial class changeTypeOfPasswordAndClearUserIdOnAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,13 @@ namespace InOut.Infrastructure.Migrations
                         .HasColumnType("VARCHAR(90)")
                         .HasColumnName("Password");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("BIGINT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Accounts", (string)null);
                 });
@@ -57,8 +65,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasMaxLength(18)
-                        .HasColumnType("VARCHAR(18)")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)")
                         .HasColumnName("Cnpj");
 
                     b.Property<long>("LocationId")
@@ -333,7 +341,7 @@ namespace InOut.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<long>("AccountId")
-                        .HasColumnType("BIGINT");
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2")
@@ -344,8 +352,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(18)
-                        .HasColumnType("VARCHAR(18)")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)")
                         .HasColumnName("CpfCnpj");
 
                     b.Property<string>("FirstName")
@@ -362,14 +370,11 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("VARCHAR(16)")
+                        .HasMaxLength(13)
+                        .HasColumnType("VARCHAR(13)")
                         .HasColumnName("Phone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId")
-                        .IsUnique();
 
                     b.HasIndex("BranchId");
 
@@ -420,6 +425,17 @@ namespace InOut.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserMovements");
+                });
+
+            modelBuilder.Entity("InOut.Domain.Entities.Account", b =>
+                {
+                    b.HasOne("InOut.Domain.Entities.User", "User")
+                        .WithOne("Account")
+                        .HasForeignKey("InOut.Domain.Entities.Account", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("InOut.Domain.Entities.Branch", b =>
@@ -498,19 +514,11 @@ namespace InOut.Infrastructure.Migrations
 
             modelBuilder.Entity("InOut.Domain.Entities.User", b =>
                 {
-                    b.HasOne("InOut.Domain.Entities.Account", "Account")
-                        .WithOne("User")
-                        .HasForeignKey("InOut.Domain.Entities.User", "AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("InOut.Domain.Entities.Branch", "Branch")
                         .WithMany("Employees")
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Account");
 
                     b.Navigation("Branch");
                 });
@@ -549,12 +557,6 @@ namespace InOut.Infrastructure.Migrations
                     b.Navigation("Movement");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("InOut.Domain.Entities.Account", b =>
-                {
-                    b.Navigation("User")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("InOut.Domain.Entities.Branch", b =>
@@ -599,6 +601,9 @@ namespace InOut.Infrastructure.Migrations
 
             modelBuilder.Entity("InOut.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Account")
+                        .IsRequired();
+
                     b.Navigation("UserBusinesses");
 
                     b.Navigation("UserMovements");
