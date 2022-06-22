@@ -1,6 +1,5 @@
 ﻿using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
-using InOut.Domain.Enums;
 using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Domain.Models.User;
@@ -25,12 +24,12 @@ namespace InOut.Service.Services
             _branchRepository = branchRepository;
         }
 
-        public async Task<bool> ExistsByEmailAndPassword(string email, byte[] password)
+        public async Task<bool> ExistsByEmailAndPassword(string email, string password)
         {
             return await _accountRepository.ExistsByEmailAndPassword(email, password);
         }
 
-        public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, byte[] password)
+        public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password)
         {
             var account = await _accountRepository.GetUserWithAccountByEmailAndPassword(email, password);
 
@@ -48,7 +47,7 @@ namespace InOut.Service.Services
         public async Task<UserDto> CreateAccountAndUserBySingUpModel(SignUpModel signUpModel)
         {
             UserDto userDto;
-            using(var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 var user = new User
                 {
@@ -60,7 +59,7 @@ namespace InOut.Service.Services
                     Account = new Account
                     {
                         Email = signUpModel.Email,
-                        Password = _crypt.Encrypt(signUpModel.Password, EEncryptionType.Password),
+                        Password = signUpModel.Password// _crypt.Encrypt(signUpModel.Password, EEncryptionType.Password), vai ser implementado o hash de senha
                     },
                     BranchId = signUpModel.BranchId,
                 };

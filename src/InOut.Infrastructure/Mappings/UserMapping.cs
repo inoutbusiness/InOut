@@ -23,7 +23,7 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("VARCHAR(60)")
                 .HasMaxLength(60);
 
-            builder.Property(x => x.FirstName)
+            builder.Property(x => x.LastName)
                 .IsRequired()
                 .HasColumnName("LastName")
                 .HasColumnType("VARCHAR(60)")
@@ -32,23 +32,19 @@ namespace InOut.Infrastructure.Mappings
             builder.Property(x => x.CpfCnpj)
                 .IsRequired()
                 .HasColumnName("CpfCnpj")
-                .HasColumnType("VARCHAR(14)")
-                .HasMaxLength(14);
+                .HasColumnType("VARCHAR(18)")
+                .HasMaxLength(18);
 
             builder.Property(x => x.Phone)
                 .IsRequired()
                 .HasColumnName("Phone")
-                .HasColumnType("VARCHAR(13)")
-                .HasMaxLength(13);
+                .HasColumnType("VARCHAR(16)")
+                .HasMaxLength(16);
 
             builder.Property(x => x.BirthDate)
                 .IsRequired()
                 .HasColumnName("BirthDate")
                 .HasColumnType("datetime2");
-
-            builder.HasOne<Account>(a => a.Account)
-                   .WithOne(b => b.User)
-                   .HasForeignKey<Account>(b => b.UserId);
 
             builder.HasOne(a => a.Branch)
                    .WithMany(b => b.Employees)

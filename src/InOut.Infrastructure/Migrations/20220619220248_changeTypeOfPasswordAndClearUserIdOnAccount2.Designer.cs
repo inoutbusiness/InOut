@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20220619220248_changeTypeOfPasswordAndClearUserIdOnAccount2")]
+    partial class changeTypeOfPasswordAndClearUserIdOnAccount2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +44,9 @@ namespace InOut.Infrastructure.Migrations
                         .HasColumnType("VARCHAR(90)")
                         .HasColumnName("Password");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.ToTable("Accounts", (string)null);
@@ -57,8 +62,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasMaxLength(18)
-                        .HasColumnType("VARCHAR(18)")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)")
                         .HasColumnName("Cnpj");
 
                     b.Property<long>("LocationId")
@@ -344,8 +349,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("CpfCnpj")
                         .IsRequired()
-                        .HasMaxLength(18)
-                        .HasColumnType("VARCHAR(18)")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)")
                         .HasColumnName("CpfCnpj");
 
                     b.Property<string>("FirstName")
@@ -362,8 +367,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("VARCHAR(16)")
+                        .HasMaxLength(13)
+                        .HasColumnType("VARCHAR(13)")
                         .HasColumnName("Phone");
 
                     b.HasKey("Id");

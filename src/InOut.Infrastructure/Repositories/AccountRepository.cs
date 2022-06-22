@@ -1,6 +1,5 @@
 ﻿using InOut.Domain.Entities;
 using InOut.Domain.Models.Auth;
-using InOut.Domain.Models.User;
 using InOut.Infrastructure.Context;
 using InOut.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -19,19 +18,24 @@ namespace InOut.Infrastructure.Repositories
         }
 
         #region Expressions
-        private Expression<Func<Account, bool>> ExpBySignInModel(string email, byte[] password)
+
+        private Expression<Func<Account, bool>> ExpBySignInModel(string email, string password)
             => w => w.Email.Equals(email) && w.Password.Equals(password);
+
         #endregion
 
         #region Public Methods
-        public async Task<bool> ExistsByEmailAndPassword(string email, byte[] password)
+        public async Task<bool> ExistsByEmailAndPassword(string email, string password)
         {
-            return await _inOutContext.Accounts.AnyAsync(ExpBySignInModel(email, password));
+            return await _inOutContext.Accounts
+                                      .AnyAsync(ExpBySignInModel(email, password));
         }
 
-        public async Task<Account?> GetUserWithAccountByEmailAndPassword(string email, byte[] password)
+        public async Task<Account?> GetUserWithAccountByEmailAndPassword(string email, string password)
         {
-            return await _inOutContext.Accounts.Include(x => x.User).FirstOrDefaultAsync(ExpBySignInModel(email, password));
+            return await _inOutContext.Accounts
+                                      .Include(x => x.User)
+                                      .FirstOrDefaultAsync(ExpBySignInModel(email, password));
         }
         #endregion
     }

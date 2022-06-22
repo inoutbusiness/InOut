@@ -30,8 +30,8 @@ namespace InOut.Infrastructure.Mappings
                 .HasMaxLength(90);
 
             builder.HasOne<User>(a => a.User)
-                   .WithOne(b => b.Account)
-                   .HasForeignKey<User>(b => b.AccountId);
+                .WithOne(b => b.Account)
+                .HasForeignKey<User>(b => b.AccountId);
         }
     }
 }
