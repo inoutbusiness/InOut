@@ -45,6 +45,7 @@ namespace InOut.IoC
         {
             serviceColletion.AddTransient<ICrypt, Crypt>();
             serviceColletion.AddTransient<ITokenGenerator, TokenGenerator>();
+            serviceColletion.AddSingleton(new MappingProfile());
         }
     }
 }
