@@ -1,10 +1,8 @@
 ﻿using InOut.API.Builders;
-using InOut.Domain.Enums;
 using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InOut.API.Controllers
