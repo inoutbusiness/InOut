@@ -10,5 +10,11 @@ namespace InOut.IoC
         {
             CreateMap<User, UserDto>();
         }
+
+        public static MapperConfiguration CreateMappingProfile()
+            => new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
     }
 }

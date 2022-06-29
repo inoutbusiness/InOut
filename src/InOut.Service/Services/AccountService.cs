@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
-using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Domain.Models.User;
 using InOut.Infrastructure.Repositories.Interfaces;
