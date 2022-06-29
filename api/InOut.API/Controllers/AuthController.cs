@@ -25,7 +25,31 @@ namespace InOut.API.Controllers
             _tokenGenerator = tokenGenerator;
         }
 
-        #region Public Methods
+        [HttpGet]
+        [Route("/api/v1/auth/gettoken")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetToken([FromBody] SignInModel test)
+        {
+            try
+            {
+                var token = _tokenGenerator.GenerateToken(test.Email);
+
+                return Ok(new ResponseModelBuilder().WithMessage("Test")
+                                                    .WithSuccess(true)
+                                                    .WithData(new
+                                                    {
+                                                        Token = token
+                                                    })
+                                                    .Build());
+                                                    
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         [HttpPost]
         [Route("/api/v1/auth/signin")]
         public async Task<IActionResult> SignIn([FromBody] SignInModel signInModel)
@@ -88,7 +112,6 @@ namespace InOut.API.Controllers
                                                                  .Build());
             }
         }
-        #endregion
 
         #region Private Methods
         private async Task<bool> CanCreateUser(SignUpModel signUpModel)
