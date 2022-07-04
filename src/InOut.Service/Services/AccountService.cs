@@ -1,6 +1,8 @@
 ﻿using EscNet.Cryptography.Interfaces;
 using EscNet.Hashers.Interfaces.Algorithms;
 using InOut.Common;
+﻿using InOut.Common;
+﻿using AutoMapper;
 using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
 using InOut.Domain.Models.Auth;
@@ -72,19 +74,8 @@ namespace InOut.Service.Services
                 var createdUser = await _userRepository.Create(user);
                 tc.Complete();
 
-                userDto = new UserDto
-                {
-                    Id = createdUser.Id,
-                    FirstName = createdUser.FirstName,
-                    AccountId = createdUser.AccountId,
-                    BirthDate = createdUser.BirthDate,
-                    BranchId = createdUser.BranchId,
-                    CpfCnpj = createdUser.CpfCnpj,
-                    LastName = createdUser.LastName,
-                    Phone = createdUser.Phone,
-                };
+                userDto = _mapper.Map<UserDto>(createdUser);
             }
-
             return userDto;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using InOut.API.Builders;
+using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
