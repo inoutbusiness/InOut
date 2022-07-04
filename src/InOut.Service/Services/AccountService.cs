@@ -1,7 +1,7 @@
 ﻿using InOut.Common;
+﻿using AutoMapper;
 using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
-using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Domain.Models.User;
 using InOut.Infrastructure.Repositories.Interfaces;
@@ -14,15 +14,13 @@ namespace InOut.Service.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IUserRepository _userRepository;
-        private readonly ICrypt _crypt;
-        private readonly IBranchRepository _branchRepository;
+        private readonly IMapper _mapper;
 
-        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, ICrypt crypt, IBranchRepository branchRepository)
+        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IMapper mapper)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
-            _crypt = crypt;
-            _branchRepository = branchRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> ExistsByEmailAndPassword(string email, string password)
@@ -69,19 +67,8 @@ namespace InOut.Service.Services
                 var createdUser = await _userRepository.Create(user);
                 tc.Complete();
 
-                userDto = new UserDto
-                {
-                    Id = createdUser.Id,
-                    FirstName = createdUser.FirstName,
-                    AccountId = createdUser.AccountId,
-                    BirthDate = createdUser.BirthDate,
-                    BranchId = createdUser.BranchId,
-                    CpfCnpj = createdUser.CpfCnpj,
-                    LastName = createdUser.LastName,
-                    Phone = createdUser.Phone,
-                };
+                userDto = _mapper.Map<UserDto>(createdUser);
             }
-
             return userDto;
         }
     }

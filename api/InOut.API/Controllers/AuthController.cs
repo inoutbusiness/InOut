@@ -1,5 +1,4 @@
 ﻿using InOut.API.Builders;
-using InOut.Domain.Enums;
 using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;

@@ -14,6 +14,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InOut.Common\InOut.Common.csproj" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InOut.Infrastructure\InOut.Infrastructure.csproj" />
   </ItemGroup>
 
