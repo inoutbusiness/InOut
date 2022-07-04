@@ -16,7 +16,7 @@ namespace InOut.Service.Token
             this._configuration = configuration;
         }
 
-        public string GenerateToken(string accountEmail)
+        public TokenData GenerateToken(long accountId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -26,7 +26,7 @@ namespace InOut.Service.Token
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, accountEmail)
+                    new Claim(ClaimTypes.Name, accountId.ToString())
                     //new Claim(ClaimTypes.Role, "User")
                 }),
                 Expires = DateTime.UtcNow.AddHours(int.Parse(_configuration["Jwt:HoursToExpire"])),
@@ -34,7 +34,13 @@ namespace InOut.Service.Token
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+
+            return new TokenData()
+            {
+                Token = tokenHandler.WriteToken(token),
+                TokenExpirationTime = 1,
+                UserId = accountId
+            };
         }
     }
 }
