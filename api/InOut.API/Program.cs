@@ -1,5 +1,8 @@
+using EscNet.IoC.Cryptography;
+using EscNet.IoC.Hashers;
 using InOut.Infrastructure.Context;
 using InOut.IoC;
+using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -76,6 +79,30 @@ builder.Services.AddSwaggerGen(x =>
     }
     });
 });
+
+#endregion
+
+#region Argon2
+
+var argonConfig = new Argon2Config()
+{
+    Type = Argon2Type.DataIndependentAddressing,
+    Version = Argon2Version.Nineteen,
+    Threads = Environment.ProcessorCount,
+    TimeCost = int.Parse(builder.Configuration["Hash:TimeCost"]),
+    MemoryCost = int.Parse(builder.Configuration["Hash:MemoryCost"]),
+    Lanes = int.Parse(builder.Configuration["Hash:Lanes"]),
+    HashLength = int.Parse(builder.Configuration["Hash:HashLength"]),
+    Salt = Encoding.UTF8.GetBytes(builder.Configuration["Hash:Salt"])
+};
+
+builder.Services.AddArgon2IdHasher(argonConfig);
+
+#endregion
+
+#region RijndaelCryptography
+
+builder.Services.AddRijndaelCryptography(builder.Configuration["CriptographyKey:Key"]);
 
 #endregion
 

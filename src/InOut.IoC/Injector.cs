@@ -6,7 +6,6 @@ using InOut.Service.Services.Interfaces;
 using InOut.Service.Token;
 using InOut.Service.Token.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using InOut.Domain.Interfaces;
 
 namespace InOut.IoC
 {
@@ -43,7 +42,6 @@ namespace InOut.IoC
 
         private static void InjectGenerics(IServiceCollection serviceColletion)
         {
-            serviceColletion.AddTransient<ICrypt, Crypt>();
             serviceColletion.AddTransient<ITokenGenerator, TokenGenerator>();
         }
     }

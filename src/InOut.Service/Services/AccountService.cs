@@ -1,7 +1,8 @@
-﻿using InOut.Common;
+﻿using EscNet.Cryptography.Interfaces;
+using EscNet.Hashers.Interfaces.Algorithms;
+using InOut.Common;
 using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
-using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Domain.Models.User;
 using InOut.Infrastructure.Repositories.Interfaces;
@@ -14,15 +15,15 @@ namespace InOut.Service.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IUserRepository _userRepository;
-        private readonly ICrypt _crypt;
-        private readonly IBranchRepository _branchRepository;
+        private readonly IArgon2IdHasher _hasher;
+        private readonly IRijndaelCryptography _rijndaelCryptography;
 
-        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, ICrypt crypt, IBranchRepository branchRepository)
+        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IArgon2IdHasher hasher, IRijndaelCryptography rijndaelCryptography)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
-            _crypt = crypt;
-            _branchRepository = branchRepository;
+            _hasher = hasher;
+            _rijndaelCryptography = rijndaelCryptography;
         }
 
         public async Task<bool> ExistsByEmailAndPassword(string email, string password)
@@ -32,7 +33,9 @@ namespace InOut.Service.Services
 
         public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password)
         {
-            var account = await _accountRepository.GetUserWithAccountByEmailAndPassword(email, password);
+            var encryptedEmail = _rijndaelCryptography.Encrypt(email);
+            var hashedPassword = _hasher.Hash(password);
+            var account = await _accountRepository.GetUserWithAccountByEmailAndPassword(encryptedEmail, hashedPassword);
 
             return new UserAccountModel
             {
@@ -60,8 +63,8 @@ namespace InOut.Service.Services
                     Phone = signUpModel.Phone,
                     Account = new Account
                     {
-                        Email = signUpModel.Email,
-                        Password = signUpModel.Password// _crypt.Encrypt(signUpModel.Password, EEncryptionType.Password), vai ser implementado o hash de senha
+                        Email = _rijndaelCryptography.Encrypt(signUpModel.Email),
+                        Password = _hasher.Hash(signUpModel.Password),
                     },
                     BranchId = signUpModel.BranchId,
                 };

@@ -12,4 +12,8 @@
     <PackageReference Include="NSec.Cryptography" Version="22.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
