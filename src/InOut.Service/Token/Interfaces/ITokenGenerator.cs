@@ -2,6 +2,6 @@
 {
     public interface ITokenGenerator
     {
-        string GenerateToken(string accountEmail);
+        TokenData GenerateToken(long accountId);
     }
 }

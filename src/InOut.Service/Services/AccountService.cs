@@ -1,4 +1,5 @@
-﻿using InOut.Domain.DTOs;
+﻿using InOut.Common;
+using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
 using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
@@ -35,6 +36,7 @@ namespace InOut.Service.Services
 
             return new UserAccountModel
             {
+                Id = account.Id.ToLong(),
                 FirstName = account.User?.FirstName,
                 LastName = account.User?.LastName,
                 BirthDate = account.User == null ? DateTime.MinValue : account.User.BirthDate,

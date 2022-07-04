@@ -4,7 +4,6 @@ using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InOut.API.Controllers
@@ -13,19 +12,18 @@ namespace InOut.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        private readonly ICrypt _crypt;
         private readonly IUserService _userService;
         private readonly ITokenGenerator _tokenGenerator;
 
-        public AuthController(IAccountService accountService, ICrypt crypt, IUserService userService, ITokenGenerator tokenGenerator)
+        public AuthController(IAccountService accountService, IUserService userService, ITokenGenerator tokenGenerator)
         {
             _accountService = accountService;
-            _crypt = crypt;
             _userService = userService;
             _tokenGenerator = tokenGenerator;
         }
 
         #region Public Methods
+
         [HttpPost]
         [Route("/api/v1/auth/signin")]
         public async Task<IActionResult> SignIn([FromBody] SignInModel signInModel)
@@ -40,12 +38,7 @@ namespace InOut.API.Controllers
 
                     return Ok(new ResponseModelBuilder().WithMessage("User exists!")
                                                         .WithSuccess(true)
-                                                        .WithData(new
-                                                        {
-                                                            Token = _tokenGenerator.GenerateToken(userAccountModel.Email),
-                                                            TokenExpires = 1, // colocar isso parametrizado dentro do sistema
-                                                            Data = userAccountModel
-                                                        })
+                                                        .WithData(_tokenGenerator.GenerateToken(userAccountModel.Id))
                                                         .Build());
                 }
 
