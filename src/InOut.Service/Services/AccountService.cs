@@ -1,3 +1,6 @@
+﻿using EscNet.Cryptography.Interfaces;
+using EscNet.Hashers.Interfaces.Algorithms;
+using InOut.Common;
 ﻿using InOut.Common;
 ﻿using AutoMapper;
 using InOut.Domain.DTOs;
@@ -14,13 +17,15 @@ namespace InOut.Service.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
+        private readonly IArgon2IdHasher _hasher;
+        private readonly IRijndaelCryptography _rijndaelCryptography;
 
-        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IMapper mapper)
+        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IArgon2IdHasher hasher, IRijndaelCryptography rijndaelCryptography)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
-            _mapper = mapper;
+            _hasher = hasher;
+            _rijndaelCryptography = rijndaelCryptography;
         }
 
         public async Task<bool> ExistsByEmailAndPassword(string email, string password)
@@ -30,7 +35,9 @@ namespace InOut.Service.Services
 
         public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password)
         {
-            var account = await _accountRepository.GetUserWithAccountByEmailAndPassword(email, password);
+            var encryptedEmail = _rijndaelCryptography.Encrypt(email);
+            var hashedPassword = _hasher.Hash(password);
+            var account = await _accountRepository.GetUserWithAccountByEmailAndPassword(encryptedEmail, hashedPassword);
 
             return new UserAccountModel
             {
@@ -58,8 +65,8 @@ namespace InOut.Service.Services
                     Phone = signUpModel.Phone,
                     Account = new Account
                     {
-                        Email = signUpModel.Email,
-                        Password = signUpModel.Password// _crypt.Encrypt(signUpModel.Password, EEncryptionType.Password), vai ser implementado o hash de senha
+                        Email = _rijndaelCryptography.Encrypt(signUpModel.Email),
+                        Password = _hasher.Hash(signUpModel.Password),
                     },
                     BranchId = signUpModel.BranchId,
                 };
