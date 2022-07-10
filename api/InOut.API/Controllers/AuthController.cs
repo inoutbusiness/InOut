@@ -1,5 +1,5 @@
 ﻿using InOut.API.Builders;
-using InOut.Domain.Interfaces;
+using InOut.Domain.Exceptions;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
@@ -11,17 +11,13 @@ namespace InOut.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        private readonly IUserService _userService;
         private readonly ITokenGenerator _tokenGenerator;
 
-        public AuthController(IAccountService accountService, IUserService userService, ITokenGenerator tokenGenerator)
+        public AuthController(IAccountService accountService, ITokenGenerator tokenGenerator)
         {
             _accountService = accountService;
-            _userService = userService;
             _tokenGenerator = tokenGenerator;
         }
-
-        #region Public Methods
 
         [HttpPost]
         [Route("/api/v1/auth/signin")]
@@ -29,19 +25,16 @@ namespace InOut.API.Controllers
         {
             try
             {
-                //var hashedPassword = _crypt.Encrypt(signInModel.Password, EEncryptionType.Password); vai ser implementado o hash de senha
+                var userAccountModel = await _accountService.GetUserWithAccountByEmailAndPassword(signInModel.Email, signInModel.Password);
 
-                if (await _accountService.ExistsByEmailAndPassword(signInModel.Email, signInModel.Password))
-                {
-                    var userAccountModel = await _accountService.GetUserWithAccountByEmailAndPassword(signInModel.Email, signInModel.Password);
-
-                    return Ok(new ResponseModelBuilder().WithMessage("User exists!")
-                                                        .WithSuccess(true)
-                                                        .WithData(_tokenGenerator.GenerateToken(userAccountModel.Id))
-                                                        .Build());
-                }
-
-                return StatusCode(401, new ResponseModelBuilder().WithMessage("User don't exists!")
+                return Ok(new ResponseModelBuilder().WithMessage("User exists!")
+                                                    .WithSuccess(true)
+                                                    .WithData(_tokenGenerator.GenerateToken(userAccountModel.Id))
+                                                    .Build());
+            }
+            catch (NotFoundedException ex)
+            {
+                return StatusCode(401, new ResponseModelBuilder().WithMessage(ex.Message)
                                                                  .WithSuccess(false)
                                                                  .Build());
             }
@@ -59,17 +52,16 @@ namespace InOut.API.Controllers
         {
             try
             {
-                if (await CanCreateUser(signUpModel))
-                {
-                    var createdUser = await _accountService.CreateAccountAndUserBySingUpModel(signUpModel);
+                var createdUser = await _accountService.CreateAccountAndUserBySingUpModel(signUpModel);
 
-                    return Created("/api/v1/auth/signup", new ResponseModelBuilder().WithMessage("User Created!")
-                                                                                    .WithSuccess(true)
-                                                                                    .WithData(createdUser)
-                                                                                    .Build());
-                }
-
-                return StatusCode(401, new ResponseModelBuilder().WithMessage("User already exists!")
+                return Created("/api/v1/auth/signup", new ResponseModelBuilder().WithMessage("User Created!")
+                                                                                .WithSuccess(true)
+                                                                                .WithData(createdUser)
+                                                                                .Build());
+            }
+            catch (AlreadyExistsException ex)
+            {
+                return StatusCode(401, new ResponseModelBuilder().WithMessage(ex.Message)
                                                                  .WithSuccess(false)
                                                                  .Build());
             }
@@ -80,16 +72,5 @@ namespace InOut.API.Controllers
                                                                  .Build());
             }
         }
-        #endregion
-
-        #region Private Methods
-        private async Task<bool> CanCreateUser(SignUpModel signUpModel)
-        {
-            //var hashedPassword = _crypt.Encrypt(signUpModel.Password, EEncryptionType.Password); vai ser implementado o hash de senha
-
-            return !await _accountService.ExistsByEmailAndPassword(signUpModel.Email, signUpModel.Password) && 
-                   !await _userService.ExistsByCpfCnpj(signUpModel.CpfCnpj);
-        }
-        #endregion
     }
 }
