@@ -17,8 +17,5 @@ namespace InOut.Common
 
         public static bool IsIdInvalid(this Base obj)
             => obj.Id.IsIdInvalid();
-
-        public static bool IsListWithItems<T>(this List<T> list)
-            => list.Count > 0;
     }
 }
