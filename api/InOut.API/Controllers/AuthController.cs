@@ -1,11 +1,9 @@
 ﻿using InOut.API.Builders;
-using InOut.Domain.Enums;
-using InOut.Domain.Interfaces;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 
 namespace InOut.API.Controllers
 {
@@ -13,14 +11,12 @@ namespace InOut.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        private readonly ICrypt _crypt;
         private readonly IUserService _userService;
         private readonly ITokenGenerator _tokenGenerator;
 
-        public AuthController(IAccountService accountService, ICrypt crypt, IUserService userService, ITokenGenerator tokenGenerator)
+        public AuthController(IAccountService accountService, IUserService userService, ITokenGenerator tokenGenerator)
         {
             _accountService = accountService;
-            _crypt = crypt;
             _userService = userService;
             _tokenGenerator = tokenGenerator;
         }
@@ -98,6 +94,35 @@ namespace InOut.API.Controllers
             return !await _accountService.ExistsByEmailAndPassword(signUpModel.Email, signUpModel.Password) && 
                    !await _userService.ExistsByCpfCnpj(signUpModel.CpfCnpj);
         }
+
         #endregion
+
+        [HttpGet]
+        [Route("/api/v1/emailGetter/getEmail")]
+        public async Task<IActionResult> GetEmailMicroServiceTest()
+        {
+            try
+            {
+                var url = "https://localhost:7145/emailSender/api/v1/sendEmail";
+                var client = new HttpClient();
+
+                client.BaseAddress = new Uri(url);
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = await client.GetAsync(url);
+
+                var data = response.Content.ReadAsStringAsync().Result;
+
+                client.Dispose();
+
+                return Ok();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
