@@ -10,6 +10,7 @@ using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Services.Interfaces;
 using System.Transactions;
 using InOut.Domain.Exceptions;
+using Microsoft.Extensions.Configuration;
 
 namespace InOut.Service.Services
 {
@@ -20,15 +21,17 @@ namespace InOut.Service.Services
         private readonly IArgon2IdHasher _hasher;
         private readonly IRijndaelCryptography _rijndaelCryptography;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
         public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IArgon2IdHasher hasher, 
-                              IRijndaelCryptography rijndaelCryptography, IMapper mapper)
+                              IRijndaelCryptography rijndaelCryptography, IMapper mapper, IConfiguration configuration)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
             _hasher = hasher;
             _rijndaelCryptography = rijndaelCryptography;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password)
@@ -82,6 +85,26 @@ namespace InOut.Service.Services
                 userDto = _mapper.Map<UserDto>(createdUser);
             }
             return userDto;
+        }
+
+        public object CreateEmailSenderResetPasswordRequest(string emailTo)
+        {
+            return new
+            {
+                Subject = "InOut - Redefinição de Senha",
+                EmailFrom = _configuration["EmailSenderWithCodeConfig:EmailFrom"],
+                EmailTo = emailTo,
+                CodeConfig = new
+                {
+                    NumberDigits = _configuration["EmailSenderWithCodeConfig:CodeConfig:NumberDigits"],
+                    ExpirationTime = _configuration["EmailSenderWithCodeConfig:CodeConfig:ExpirationTime"]
+                },
+                AuthenticateInfo = new
+                {
+                    EmailAuth = _configuration["EmailSenderWithCodeConfig:AuthenticateInfo:EmailAuth"],
+                    PasswordAuth = _configuration["EmailSenderWithCodeConfig:AuthenticateInfo:PasswordAuth"]
+                }
+            };
         }
     }
 }

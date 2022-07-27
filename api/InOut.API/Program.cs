@@ -14,12 +14,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+#region Injections
+
 Injector.InjectIoCServices(builder.Services);
 builder.Services.AddSingleton(x => builder.Configuration);
 
+#endregion
+
+#region Database
+
 builder.Services.AddDbContext<InOutContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("InOutDefaultConnection")), ServiceLifetime.Transient);
-    
+
+#endregion
+
 #region Jwt
 
 builder.Services.AddAuthentication(x =>

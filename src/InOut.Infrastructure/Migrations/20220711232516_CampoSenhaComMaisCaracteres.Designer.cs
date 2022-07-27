@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20220711232516_CampoSenhaComMaisCaracteres")]
+    partial class CampoSenhaComMaisCaracteres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
