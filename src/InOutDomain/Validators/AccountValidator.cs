@@ -26,8 +26,8 @@ namespace InOut.Domain.Validators
                 .WithMessage("A senha não pode ser vázio.")
                 .MinimumLength(6)
                 .WithMessage("A senha deve ter no mínimo 6 caractéres")
-                .MaximumLength(90)
-                .WithMessage("A senha deve ter no máximo 90 caractéres");
+                .MaximumLength(255)
+                .WithMessage("A senha deve ter no máximo 255 caractéres");
         }
     }
 }

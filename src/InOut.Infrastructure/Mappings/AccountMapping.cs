@@ -26,8 +26,8 @@ namespace InOut.Infrastructure.Mappings
             builder.Property(x => x.Password)
                 .IsRequired()
                 .HasColumnName("Password")
-                .HasColumnType("VARCHAR(90)")
-                .HasMaxLength(90);
+                .HasColumnType("VARCHAR(255)")
+                .HasMaxLength(255);
 
             builder.HasOne<User>(a => a.User)
                 .WithOne(b => b.Account)

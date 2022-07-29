@@ -34,13 +34,13 @@ namespace InOut.API.Controllers
             }
             catch (NotFoundedException ex)
             {
-                return StatusCode(401, new ResponseModelBuilder().WithMessage(ex.Message)
+                return StatusCode(400, new ResponseModelBuilder().WithMessage(ex.Message)
                                                                  .WithSuccess(false)
                                                                  .Build());
             }
             catch (Exception ex)
             {
-                return StatusCode(401, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
+                return StatusCode(400, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
                                                                  .WithSuccess(false)
                                                                  .Build());
             }
@@ -61,13 +61,13 @@ namespace InOut.API.Controllers
             }
             catch (AlreadyExistsException ex)
             {
-                return StatusCode(401, new ResponseModelBuilder().WithMessage(ex.Message)
+                return StatusCode(400, new ResponseModelBuilder().WithMessage(ex.Message)
                                                                  .WithSuccess(false)
                                                                  .Build());
             }
             catch (Exception ex)
             {
-                return StatusCode(401, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
+                return StatusCode(400, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
                                                                  .WithSuccess(false)
                                                                  .Build());
             }

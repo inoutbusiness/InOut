@@ -10,7 +10,6 @@ namespace InOut.Domain.Models.Auth
         public string Email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "A senha não pode ser vázio.")]
-        [JsonIgnore]
         public string Password { get; set; } = string.Empty;
     }
 }
