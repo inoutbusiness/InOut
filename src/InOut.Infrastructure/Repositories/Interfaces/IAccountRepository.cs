@@ -1,5 +1,4 @@
 ﻿using InOut.Domain.Entities;
-using InOut.Domain.Models.Auth;
 
 namespace InOut.Infrastructure.Repositories.Interfaces
 {
@@ -7,5 +6,7 @@ namespace InOut.Infrastructure.Repositories.Interfaces
     {
         Task<bool> ExistsByEmailAndPassword(string email, string password);
         Task<Account?> GetUserWithAccountByEmailAndPassword(string email, string password);
+        Task ResetPassword(long accountId, string newPassword);
+        Task<long> GetAccountIdByEmail(string email);
     }
 }

@@ -66,5 +66,25 @@ namespace InOut.API.Controllers
 
             return Ok(new ResponseModel());
         }
+
+        [HttpPost]
+        [Route("/api/v1/forgotPassword/ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPasswordModel)
+        {
+            try
+            {
+                await _accountService.ResetPassword(resetPasswordModel.AccountId, resetPasswordModel.NewPassword);
+
+                return Ok(new ResponseModel()
+                {
+                    Success = true,
+                    Message = "Password changed"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(401, ex.Message);
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿using InOut.Domain.Entities;
-using InOut.Domain.Models.Auth;
+﻿using InOut.Common;
+using InOut.Domain.Entities;
 using InOut.Infrastructure.Context;
 using InOut.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ namespace InOut.Infrastructure.Repositories
     {
         private readonly InOutContext _inOutContext;
 
-        public AccountRepository(InOutContext inOutContext) 
+        public AccountRepository(InOutContext inOutContext)
             : base(inOutContext)
         {
             _inOutContext = inOutContext;
@@ -20,11 +20,13 @@ namespace InOut.Infrastructure.Repositories
         #region Expressions
 
         private Expression<Func<Account, bool>> ExpBySignInModel(string email, string password)
-            => w => w.Email.Equals(email) && w.Password.Equals(password);
+            => exp => exp.Email.Equals(email) && exp.Password.Equals(password);
+
+        private Expression<Func<Account, bool>> ExpById(long accountId)
+            => exp => exp.Id.Equals(accountId);
 
         #endregion
 
-        #region Public Methods
         public async Task<bool> ExistsByEmailAndPassword(string email, string password)
         {
             return await _inOutContext.Accounts
@@ -37,6 +39,27 @@ namespace InOut.Infrastructure.Repositories
                                       .Include(x => x.User)
                                       .FirstOrDefaultAsync(ExpBySignInModel(email, password));
         }
-        #endregion
+
+        public async Task ResetPassword(long accountId, string newPassword)
+        {
+            var account = await _inOutContext.Accounts.FirstOrDefaultAsync(ExpById(accountId));
+
+            if (account != null)
+            {
+                _inOutContext.Entry(account).State = EntityState.Modified;
+                account.Password = newPassword;
+                await _inOutContext.SaveChangesAsync();
+            }
+
+            var a = await _inOutContext.Accounts.Where(x => x.Email == newPassword)
+                                           .Select(s => s.Id)
+                                           .SingleOrDefaultAsync();
+        }
+
+        public async Task<long> GetAccountIdByEmail(string email)
+            => (await _inOutContext.Accounts.Where(x => x.Email == email)
+                                           .Select(s => s.Id)
+                                           .SingleOrDefaultAsync())
+                                           .ToLong();
     }
 }
