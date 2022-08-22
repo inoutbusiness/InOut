@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\InOut.Common\InOut.Common.csproj" />
     <ProjectReference Include="..\..\src\InOut.IoC\InOut.IoC.csproj" />
     <ProjectReference Include="..\..\src\InOut.Service\InOut.Service.csproj" />
   </ItemGroup>

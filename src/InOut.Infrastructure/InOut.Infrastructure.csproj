@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InOut.Common\InOut.Common.csproj" />
     <ProjectReference Include="..\InOutDomain\InOut.Domain.csproj" />
   </ItemGroup>
 

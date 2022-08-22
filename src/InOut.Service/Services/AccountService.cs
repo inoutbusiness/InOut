@@ -105,6 +105,15 @@ namespace InOut.Service.Services
                     PasswordAuth = _configuration["EmailSenderWithCodeConfig:AuthenticateInfo:PasswordAuth"]
                 }
             };
+        }  
+
+        public async Task ResetPassword(long accountId, string newPassword)
+        {
+            using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                await _accountRepository.ResetPassword(accountId, _hasher.Hash(newPassword));
+                tc.Complete();
+            }
         }
     }
 }

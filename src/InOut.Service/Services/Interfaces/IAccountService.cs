@@ -9,5 +9,6 @@ namespace InOut.Service.Services.Interfaces
         Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password);
         Task<UserDto> CreateAccountAndUserBySingUpModel(SignUpModel signUpModel);
         object CreateEmailSenderResetPasswordRequest(string emailTo);
+        Task ResetPassword(long accountId, string newPassword);
     }
 }
