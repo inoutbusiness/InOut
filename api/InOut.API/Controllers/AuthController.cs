@@ -25,24 +25,24 @@ namespace InOut.API.Controllers
         {
             try
             {
-                var userAccountModel = await _accountService.GetUserWithAccountByEmailAndPassword(signInModel.Email, signInModel.Password);
+                var userAccountModelCretated = await _accountService.GetUserWithAccountByEmailAndPassword(signInModel.Email, signInModel.Password);
+
+                var generatedToken = _tokenGenerator.GenerateToken(userAccountModelCretated.Id);
 
                 return Ok(new ResponseModelBuilder().WithMessage("User exists!")
                                                     .WithSuccess(true)
-                                                    .WithData(_tokenGenerator.GenerateToken(userAccountModel.Id))
+                                                    .WithData(generatedToken)
                                                     .Build());
             }
             catch (NotFoundedException ex)
             {
-                return StatusCode(400, new ResponseModelBuilder().WithMessage(ex.Message)
-                                                                 .WithSuccess(false)
-                                                                 .Build());
+                return BadRequest(new ResponseModelBuilder().WithMessage(ex.Message)
+                                                            .Build());
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
-                                                                 .WithSuccess(false)
-                                                                 .Build());
+                return BadRequest(new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
+                                                            .Build());
             }
         }
 
@@ -52,7 +52,7 @@ namespace InOut.API.Controllers
         {
             try
             {
-                var createdUser = await _accountService.CreateAccountAndUserBySingUpModel(signUpModel);
+                var createdUser = await _accountService.CreateAccountAndUser(signUpModel);
 
                 return Created("/api/v1/auth/signup", new ResponseModelBuilder().WithMessage("User Created!")
                                                                                 .WithSuccess(true)
@@ -61,15 +61,13 @@ namespace InOut.API.Controllers
             }
             catch (AlreadyExistsException ex)
             {
-                return StatusCode(400, new ResponseModelBuilder().WithMessage(ex.Message)
-                                                                 .WithSuccess(false)
-                                                                 .Build());
+                return BadRequest(new ResponseModelBuilder().WithMessage(ex.Message)
+                                                            .Build());
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
-                                                                 .WithSuccess(false)
-                                                                 .Build());
+                return BadRequest(new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
+                                                            .Build());
             }
         }
     }

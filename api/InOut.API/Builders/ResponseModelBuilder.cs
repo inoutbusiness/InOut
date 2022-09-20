@@ -4,9 +4,9 @@ namespace InOut.API.Builders
 {
     public class ResponseModelBuilder
     {
-        private object? _data;
+        private object? _data = null;
         private string _message = string.Empty;
-        private bool _success;
+        private bool _success = false;
 
         public ResponseModelBuilder WithData(object? data)
         {

@@ -7,7 +7,7 @@ namespace InOut.Service.Services.Interfaces
     public interface IAccountService
     {
         Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password);
-        Task<UserDto> CreateAccountAndUserBySingUpModel(SignUpModel signUpModel);
+        Task<UserDto> CreateAccountAndUser(SignUpModel signUpModel);
         object CreateEmailSenderResetPasswordRequest(string emailTo);
         Task ResetPassword(long accountId, string newPassword);
     }
