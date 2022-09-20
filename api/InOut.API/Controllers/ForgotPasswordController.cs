@@ -39,13 +39,12 @@ namespace InOut.API.Controllers
             }
             catch (HttpRequestException requestEx)
             {
-                return StatusCode(404, new ResponseModelBuilder().WithMessage($"A url: {url} não foi reconhecida, verifique se a API está ONLINE."));
+                return BadRequest(new ResponseModelBuilder().WithMessage($"A url: {url} não foi reconhecida, verifique se a API está ONLINE."));
             }
             catch (Exception ex)
             {
-                return StatusCode(401, new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
-                                                                 .WithSuccess(false)
-                                                                 .Build());
+                return BadRequest(new ResponseModelBuilder().WithMessage($"{ex.Message} {ex.InnerException?.Message}")
+                                                            .Build());
             }
         }
 
@@ -68,7 +67,7 @@ namespace InOut.API.Controllers
         }
 
         [HttpPost]
-        [Route("/api/v1/forgotPassword/ResetPassword")]
+        [Route("/api/v1/forgotPassword/resetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPasswordModel)
         {
             try
@@ -83,7 +82,7 @@ namespace InOut.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(401, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }

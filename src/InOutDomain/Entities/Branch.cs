@@ -8,7 +8,7 @@
         public long LocationId { get; set; }
         public Location Location { get; set; }
 
-        public Inventory Inventory { get; set; }
+        public Inventory Inventory { get; set; } // Avaliar se precisa mesmo
 
         public ICollection<User> Employees { get; set; }
 

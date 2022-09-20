@@ -56,7 +56,7 @@ namespace InOut.Service.Services
             };
         }
 
-        public async Task<UserDto> CreateAccountAndUserBySingUpModel(SignUpModel signUpModel)
+        public async Task<UserDto> CreateAccountAndUser(SignUpModel signUpModel)
         {
             if (await _userRepository.ExistsByCpfCnpj(signUpModel.CpfCnpj))
                 throw new AlreadyExistsException("Já existe um usuário com o CPF/CNPJ cadastrado");

@@ -52,14 +52,14 @@ namespace InOut.Infrastructure.Repositories
             }
 
             var a = await _inOutContext.Accounts.Where(x => x.Email == newPassword)
-                                           .Select(s => s.Id)
-                                           .SingleOrDefaultAsync();
+                                                .Select(s => s.Id)
+                                                .SingleOrDefaultAsync();
         }
 
         public async Task<long> GetAccountIdByEmail(string email)
             => (await _inOutContext.Accounts.Where(x => x.Email == email)
-                                           .Select(s => s.Id)
-                                           .SingleOrDefaultAsync())
-                                           .ToLong();
+                                            .Select(s => s.Id)
+                                            .SingleOrDefaultAsync())
+                                            .ToLong();
     }
 }
