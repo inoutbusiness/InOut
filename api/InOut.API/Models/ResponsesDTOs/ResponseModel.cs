@@ -1,4 +1,4 @@
-﻿namespace InOut.API.Models
+﻿namespace InOut.API.Models.ResponsesDTOs
 {
     public class ResponseModel
     {
