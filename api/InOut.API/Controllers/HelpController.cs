@@ -38,13 +38,5 @@ namespace InOut.API.Controllers
             return BadRequest(new ResponseModelBuilder().WithMessage("Account Id not found")
                                                         .Build());
         }
-
-        [HttpPost]
-        [Route("/api/v1/helper/getAccountInfoById")]
-        public async Task<IActionResult> GetAccountInfoById([FromBody] long id) // Arrumar
-        {
-            var accountInfo = await _accountRepository.GetUserInfoResponseDto(id);
-            return Ok(accountInfo);
-        }
     }
 }
