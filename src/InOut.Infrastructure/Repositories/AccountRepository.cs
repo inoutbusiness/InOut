@@ -1,4 +1,5 @@
 ﻿using InOut.Common;
+using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
 using InOut.Infrastructure.Context;
 using InOut.Infrastructure.Repositories.Interfaces;
@@ -61,5 +62,19 @@ namespace InOut.Infrastructure.Repositories
                                             .Select(s => s.Id)
                                             .SingleOrDefaultAsync())
                                             .ToLong();
+
+        public async Task<UserInfoResponseDto> GetUserInfoResponseDto(long id)
+            => await _inOutContext.Accounts.Where(x => x.Id == id)
+                                           .Include(x => x.User)
+                                           .Select(s => new UserInfoResponseDto()
+                                           {
+                                               Email = s.Email,
+                                               FirstName = s.User.FirstName,
+                                               LastName = s.User.LastName,
+                                               CpfCnpj = s.User.CpfCnpj,
+                                               Phone = s.User.Phone,
+                                               BirthDate = s.User.BirthDate
+                                           })
+                                           .SingleOrDefaultAsync() ?? new UserInfoResponseDto();
     }
 }

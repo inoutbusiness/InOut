@@ -1,8 +1,10 @@
 ﻿using InOut.API.Builders;
+using InOut.API.Models.ResponsesDTOs;
 using InOut.Domain.Exceptions;
 using InOut.Domain.Models.Auth;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InOut.API.Controllers
@@ -21,23 +23,27 @@ namespace InOut.API.Controllers
 
         [HttpPost]
         [Route("/api/v1/auth/signin")]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInModel signInModel)
         {
             try
             {
                 var userAccountModelCretated = await _accountService.GetUserWithAccountByEmailAndPassword(signInModel.Email, signInModel.Password);
-
                 var generatedToken = _tokenGenerator.GenerateToken(userAccountModelCretated.Id);
 
                 return Ok(new ResponseModelBuilder().WithMessage("User exists!")
                                                     .WithSuccess(true)
-                                                    .WithData(generatedToken)
+                                                    .WithData(new SigninResponseDto() 
+                                                    {
+                                                        UserAccountModel = userAccountModelCretated,
+                                                        TokenData = generatedToken
+                                                    })
                                                     .Build());
             }
             catch (NotFoundedException ex)
             {
-                return BadRequest(new ResponseModelBuilder().WithMessage(ex.Message)
-                                                            .Build());
+                return NotFound(new ResponseModelBuilder().WithMessage(ex.Message)
+                                                          .Build());
             }
             catch (Exception ex)
             {
@@ -48,6 +54,7 @@ namespace InOut.API.Controllers
 
         [HttpPost]
         [Route("/api/v1/auth/signup")]
+        [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] SignUpModel signUpModel)
         {
             try

@@ -1,5 +1,6 @@
 ﻿using InOut.API.Builders;
 using InOut.API.Models;
+using InOut.API.Models.ResponsesDTOs;
 using InOut.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

@@ -1,4 +1,4 @@
-﻿using InOut.API.Models;
+﻿using InOut.API.Models.ResponsesDTOs;
 
 namespace InOut.API.Builders
 {
