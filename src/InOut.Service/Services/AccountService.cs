@@ -52,11 +52,11 @@ namespace InOut.Service.Services
                 BirthDate = account.User == null ? DateTime.MinValue : account.User.BirthDate,
                 Phone = account.User.Phone,
                 CpfCnpj = account.User.CpfCnpj,
-                Email = account.Email,
+                Email = _rijndaelCryptography.Decrypt(account.Email),
             };
         }
 
-        public async Task<UserDto> CreateAccountAndUserBySingUpModel(SignUpModel signUpModel)
+        public async Task<UserDto> CreateAccountAndUser(SignUpModel signUpModel)
         {
             if (await _userRepository.ExistsByCpfCnpj(signUpModel.CpfCnpj))
                 throw new AlreadyExistsException("Já existe um usuário com o CPF/CNPJ cadastrado");
@@ -114,6 +114,39 @@ namespace InOut.Service.Services
                 await _accountRepository.ResetPassword(accountId, _hasher.Hash(newPassword));
                 tc.Complete();
             }
+        }
+
+        public async Task<UserAccountModel> UpdateUserAccountInfo(UserAccountModel userAccountModel)
+        {
+            User? userInfo = null;
+
+            using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                var userUpdated = await _userRepository.GetUserByAccountId(userAccountModel.Id);
+
+                if (userUpdated == null)
+                    throw new Exception("Informações não encontradas para esta conta!");
+
+                userUpdated.BirthDate = userAccountModel.BirthDate;
+                userUpdated.CpfCnpj = userAccountModel.CpfCnpj;
+                userUpdated.FirstName = userAccountModel.FirstName;
+                userUpdated.LastName = userAccountModel.LastName;
+                userUpdated.Phone = userAccountModel.Phone;
+
+                userInfo = await _userRepository.Update(userUpdated);
+
+                tc.Complete();
+            }
+
+            return new UserAccountModel()
+            {
+                Id = userInfo.Id.ToLong(),
+                FirstName = userInfo.FirstName,
+                LastName = userInfo.LastName,
+                BirthDate = userInfo.BirthDate,
+                Phone = userInfo.Phone,
+                CpfCnpj = userInfo.CpfCnpj,
+            };
         }
     }
 }

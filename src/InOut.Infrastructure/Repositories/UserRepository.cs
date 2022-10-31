@@ -18,9 +18,11 @@ namespace InOut.Infrastructure.Repositories
             => w => w.CpfCnpj.Equals(cpfCnpj);
 
         public async Task<bool> ExistsByCpfCnpj(string cpfCnpj)
-        {
-            return await _inOutContext.Users
-                                      .AnyAsync(ExpExistsByCpfCnpj(cpfCnpj));
-        }
+            => await _inOutContext.Users
+                                  .AnyAsync(ExpExistsByCpfCnpj(cpfCnpj));
+
+        public async Task<User?> GetUserByAccountId(long accountId)
+            => await _inOutContext.Users
+                                  .FirstOrDefaultAsync(x => x.AccountId == accountId);
     }
 }

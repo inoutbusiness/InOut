@@ -1,5 +1,6 @@
 ﻿using EscNet.Cryptography.Interfaces;
-using InOut.API.Models;
+using InOut.API.Builders;
+using InOut.Common;
 using InOut.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,17 +22,29 @@ namespace InOut.API.Controllers
         }
 
         [HttpPost]
-        [Route("/api/v1/forgotPassword/getAccountId")]
+        [Route("/api/v1/helper/getAccountIdByEmail")] //trocar nome talvez?
         public async Task<IActionResult> GetAccountIdByEmail([FromBody] string email)
         {
             var accountId = await _accountRepository.GetAccountIdByEmail(_rijndaelCryptography.Encrypt(email));
 
-            return Ok(
-            new ResponseModel()
+            if (accountId.IsIdValid())
             {
-                Success = true,
-                Data = accountId.ToString()
-            });
+                return Ok(new ResponseModelBuilder().WithMessage($"Account Id: {accountId}")
+                                                    .WithSuccess(true)
+                                                    .WithData(accountId)
+                                                    .Build());                      // ALTERAR NO REACT TAMBEM, A CHAMADA MUDA
+            }
+
+            return BadRequest(new ResponseModelBuilder().WithMessage("Account Id not found")
+                                                        .Build());
+        }
+
+        [HttpPost]
+        [Route("/api/v1/helper/getAccountInfoById")]
+        public async Task<IActionResult> GetAccountInfoById([FromBody] long id) // Arrumar
+        {
+            var accountInfo = await _accountRepository.GetUserInfoResponseDto(id);
+            return Ok(accountInfo);
         }
     }
 }
