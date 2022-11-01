@@ -1,6 +1,4 @@
-﻿using InOut.Domain.Models.Auth;
-using InOut.Domain.Models.User;
-using InOut.Infrastructure.Repositories.Interfaces;
+﻿using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Services.Interfaces;
 
 namespace InOut.Service.Services
@@ -12,11 +10,6 @@ namespace InOut.Service.Services
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-        }
-
-        public Task<bool> ExistsByCpfCnpj(string cpfCnpj)
-        {
-            return _userRepository.ExistsByCpfCnpj(cpfCnpj);
         }
     }
 }
