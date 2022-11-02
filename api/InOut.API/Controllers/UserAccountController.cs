@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InOut.API.Controllers
 {
-    public class UserAccountController : Controller
+    [ApiController]
+    public class UserAccountController : ControllerBase
     {
         private readonly IUserAccountService _userAccountService;
 
@@ -15,7 +16,7 @@ namespace InOut.API.Controllers
 
         [HttpPut]
         [Route("/api/v1/userAccount/updateUserAccountInfo/{accountId}")]
-        public async Task<IActionResult> UpdateUserAccountInfo(int accountId, [FromBody] UserAccountModel userAccountModel)
+        public async Task<IActionResult> UpdateUserAccountInfo(int accountId, [FromBody] UserAccountModel userAccountModel) // IMPLEMENTAR AUTHORIZATION NOS HEADERS DAS REQUISICOES
         {
             try
             {
