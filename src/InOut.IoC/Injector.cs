@@ -38,6 +38,7 @@ namespace InOut.IoC
             serviceColletion.AddScoped<IProductService, ProductService>();
             serviceColletion.AddScoped<IProviderService, ProviderService>();
             serviceColletion.AddScoped<IUserService, UserService>();
+            serviceColletion.AddScoped<IUserAccountService, UserAccountService>();
         }
 
         private static void InjectGenerics(IServiceCollection serviceColletion)
