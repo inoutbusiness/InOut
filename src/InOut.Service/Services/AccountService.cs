@@ -115,38 +115,5 @@ namespace InOut.Service.Services
                 tc.Complete();
             }
         }
-
-        public async Task<UserAccountModel> UpdateUserAccountInfo(UserAccountModel userAccountModel)
-        {
-            User? userInfo = null;
-
-            using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var userUpdated = await _userRepository.GetUserByAccountId(userAccountModel.Id);
-
-                if (userUpdated == null)
-                    throw new Exception("Informações não encontradas para esta conta!");
-
-                userUpdated.BirthDate = userAccountModel.BirthDate;
-                userUpdated.CpfCnpj = userAccountModel.CpfCnpj;
-                userUpdated.FirstName = userAccountModel.FirstName;
-                userUpdated.LastName = userAccountModel.LastName;
-                userUpdated.Phone = userAccountModel.Phone;
-
-                userInfo = await _userRepository.Update(userUpdated);
-
-                tc.Complete();
-            }
-
-            return new UserAccountModel()
-            {
-                Id = userInfo.Id.ToLong(),
-                FirstName = userInfo.FirstName,
-                LastName = userInfo.LastName,
-                BirthDate = userInfo.BirthDate,
-                Phone = userInfo.Phone,
-                CpfCnpj = userInfo.CpfCnpj,
-            };
-        }
     }
 }

@@ -1,19 +1,16 @@
-﻿using EscNet.Cryptography.Interfaces;
-using InOut.Common;
-using InOut.Domain.Models.User;
+﻿using InOut.Domain.Models.User;
 using InOut.Service.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InOut.API.Controllers
 {
     public class UserAccountController : Controller
     {
-        private readonly IAccountService _accountService;
+        private readonly IUserAccountService _userAccountService;
 
-        public UserAccountController(IAccountService accountService)
+        public UserAccountController(IUserAccountService userAccountService)
         {
-            _accountService = accountService;
+            _userAccountService = userAccountService;
         }
 
         [HttpPut]
@@ -24,7 +21,7 @@ namespace InOut.API.Controllers
             {
                 userAccountModel.Id = accountId;
 
-                var response = await _accountService.UpdateUserAccountInfo(userAccountModel);
+                var response = await _userAccountService.UpdateUserAccountInfo(userAccountModel);
 
                 return Ok(response);
             }

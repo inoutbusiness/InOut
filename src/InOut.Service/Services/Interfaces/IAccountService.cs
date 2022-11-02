@@ -11,6 +11,5 @@ namespace InOut.Service.Services.Interfaces
         Task<UserDto> CreateAccountAndUser(SignUpModel signUpModel);
         object CreateEmailSenderResetPasswordRequest(string emailTo);
         Task ResetPassword(long accountId, string newPassword);
-        Task<UserAccountModel> UpdateUserAccountInfo(UserAccountModel userAccountModel);
     }
 }
