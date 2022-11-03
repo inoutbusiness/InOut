@@ -1,6 +1,7 @@
-﻿using InOut.Domain.Entities;
-using InOut.Infrastructure.Repositories;
+﻿using InOut.Infrastructure.Repositories;
 using InOut.Infrastructure.Repositories.Interfaces;
+using InOut.Service.Cache;
+using InOut.Service.Cache.Interfaces;
 using InOut.Service.Services;
 using InOut.Service.Services.Interfaces;
 using InOut.Service.Token;
@@ -39,11 +40,13 @@ namespace InOut.IoC
             serviceColletion.AddScoped<IProviderService, ProviderService>();
             serviceColletion.AddScoped<IUserService, UserService>();
             serviceColletion.AddScoped<IUserAccountService, UserAccountService>();
+            serviceColletion.AddScoped<IPasswordRecoveryService, PasswordRecoveryService>();
         }
 
         private static void InjectGenerics(IServiceCollection serviceColletion)
         {
             serviceColletion.AddScoped<ITokenGenerator, TokenGenerator>();
+            serviceColletion.AddScoped<ICacheManager, CacheManager>();
             serviceColletion.AddSingleton(MappingProfile.CreateMappingProfile().CreateMapper());
         }
     }

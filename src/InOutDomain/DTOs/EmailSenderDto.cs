@@ -1,6 +1,6 @@
-﻿namespace InOut.API.Models
+﻿namespace InOut.Domain.DTOs
 {
-    public class EmailSenderResponse
+    public class EmailSenderDto
     {
         public bool Success { get; set; } = false;
         public string Message { get; set; } = string.Empty;

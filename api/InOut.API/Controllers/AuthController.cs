@@ -33,7 +33,7 @@ namespace InOut.API.Controllers
 
                 return Ok(new ResponseModelBuilder().WithMessage("User exists!")
                                                     .WithSuccess(true)
-                                                    .WithData(new SigninResponseDto() 
+                                                    .WithData(new SigninResponseDto()
                                                     {
                                                         UserAccountModel = userAccountModelCretated,
                                                         TokenData = generatedToken

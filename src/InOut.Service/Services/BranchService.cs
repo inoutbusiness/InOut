@@ -42,4 +42,4 @@ namespace InOut.Service.Services
             return branchDto;
         }
     }
-} 
+}

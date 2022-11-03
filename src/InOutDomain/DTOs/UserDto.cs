@@ -10,6 +10,5 @@
         public DateTime BirthDate { get; set; }
         public long AccountId { get; set; }
         public long BranchId { get; set; }
-
     }
 }

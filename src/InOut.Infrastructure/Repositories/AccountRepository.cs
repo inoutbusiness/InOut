@@ -26,7 +26,7 @@ namespace InOut.Infrastructure.Repositories
         private Expression<Func<Account, bool>> ExpById(long accountId)
             => exp => exp.Id.Equals(accountId);
 
-        #endregion
+        #endregion Expressions
 
         public async Task<bool> ExistsByEmailAndPassword(string email, string password)
         {
@@ -41,20 +41,11 @@ namespace InOut.Infrastructure.Repositories
                                       .FirstOrDefaultAsync(ExpBySignInModel(email, password));
         }
 
-        public async Task ResetPassword(long accountId, string newPassword)
+        public async Task ResetPassword(Account account, string newPassword)
         {
-            var account = await _inOutContext.Accounts.FirstOrDefaultAsync(ExpById(accountId));
-
-            if (account != null)
-            {
-                _inOutContext.Entry(account).State = EntityState.Modified;
-                account.Password = newPassword;
-                await _inOutContext.SaveChangesAsync();
-            }
-
-            var a = await _inOutContext.Accounts.Where(x => x.Email == newPassword)
-                                                .Select(s => s.Id)
-                                                .SingleOrDefaultAsync();
+            _inOutContext.Entry(account).State = EntityState.Modified;
+            account.Password = newPassword;
+            await _inOutContext.SaveChangesAsync();
         }
 
         public async Task<long> GetAccountIdByEmail(string email)
