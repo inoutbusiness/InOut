@@ -9,6 +9,7 @@ namespace InOut.Infrastructure.Repositories
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly InOutContext _inOutContext;
+
         public UserRepository(InOutContext inOutContext) : base(inOutContext)
         {
             _inOutContext = inOutContext;

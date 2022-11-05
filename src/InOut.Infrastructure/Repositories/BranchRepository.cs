@@ -9,7 +9,7 @@ namespace InOut.Infrastructure.Repositories
     {
         private readonly InOutContext _context;
 
-        public BranchRepository(InOutContext inOutContext) : base(inOutContext) 
+        public BranchRepository(InOutContext inOutContext) : base(inOutContext)
         {
             _context = inOutContext;
         }

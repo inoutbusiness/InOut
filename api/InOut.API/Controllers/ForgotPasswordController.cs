@@ -1,9 +1,8 @@
 ﻿using InOut.API.Builders;
 using InOut.API.Models;
-using InOut.API.Models.ResponsesDTOs;
+using InOut.Domain.Exceptions;
 using InOut.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace InOut.API.Controllers
 {
@@ -12,35 +11,34 @@ namespace InOut.API.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IConfiguration _configuration;
+        private readonly IPasswordRecoveryService _passwordRecoveryService;
 
-        public ForgotPasswordController(IAccountService accountService, IConfiguration configuration)
+        public ForgotPasswordController(IAccountService accountService, IConfiguration configuration, IPasswordRecoveryService emailRecoveryService)
         {
             _accountService = accountService;
             _configuration = configuration;
+            _passwordRecoveryService = emailRecoveryService;
         }
 
+        /// <summary>
+        /// Send a reset token to an expecified email.
+        /// </summary>
+        /// <param name="emailRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/api/v1/forgotPassword/sendResetPasswordCode")]
-        public async Task<IActionResult> SendEmailCodeResetPassword([FromBody] string emailRequest)
+        public async Task<IActionResult> SendEmailCodeResetPassword([FromBody] string emailTo)
         {
-            var url = "https://localhost:7145/api/v1/emailSender/sendEmail";
-
             try
             {
-                using (var client = new HttpClient())
-                {
-                    var request = _accountService.CreateEmailSenderResetPasswordRequest(emailRequest);
-                    var response = await client.PostAsJsonAsync(url, request);
+                var responseData = await _passwordRecoveryService.SendRecoveryToken(emailTo);
 
-                    var responseData = JsonConvert.DeserializeObject<EmailSenderResponse>(await response.Content.ReadAsStringAsync());
-                    _configuration["EmailSenderWithCodeConfig:CodeConfig:Code"] = responseData?.Code;
-
-                    return Ok(responseData);
-                }
+                return Ok(responseData);
             }
-            catch (HttpRequestException requestEx)
+            catch (HttpRequestException ex)
             {
-                return BadRequest(new ResponseModelBuilder().WithMessage($"A url: {url} não foi reconhecida, verifique se a API está ONLINE."));
+                return BadRequest(new ResponseModelBuilder().WithMessage($"Verifique se a API está ONLINE.")
+                                                            .Build());
             }
             catch (Exception ex)
             {
@@ -49,24 +47,34 @@ namespace InOut.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Validate if the inputed token is valid.
+        /// </summary>
+        /// <param name="verifyEmailCodeModel"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/api/v1/forgotPassword/emailCodeChecker")]
-        public async Task<IActionResult> VerifyEmailCode([FromBody] string codeUserInput)
+        public IActionResult VerifyEmailCode([FromBody] VerifyEmailCodeModel verifyEmailCodeModel)
         {
-            var codeReceived = _configuration["EmailSenderWithCodeConfig:CodeConfig:Code"].ToString();
-
-            if (codeReceived == codeUserInput)
+            try
             {
-                return Ok(new ResponseModel()
-                {
-                    Success = true,
-                    Message = "Code checked!"
-                });
-            }
+                _passwordRecoveryService.ValidateInputedToken(verifyEmailCodeModel.Email, verifyEmailCodeModel.InputedToken);
 
-            return Ok(new ResponseModel());
+                return Ok(new ResponseModelBuilder().WithMessage("Código validado.")
+                                                    .WithSuccess(true)
+                                                    .Build());
+            }
+            catch (PasswordRecoveryException ex)
+            {
+                return BadRequest(new ResponseModelBuilder().WithMessage(ex.Message).Build());
+            }
         }
 
+        /// <summary>
+        /// Set a new password to an expecified Account.
+        /// </summary>
+        /// <param name="resetPasswordModel"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/api/v1/forgotPassword/resetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordModel resetPasswordModel)
@@ -75,11 +83,9 @@ namespace InOut.API.Controllers
             {
                 await _accountService.ResetPassword(resetPasswordModel.AccountId, resetPasswordModel.NewPassword);
 
-                return Ok(new ResponseModel()
-                {
-                    Success = true,
-                    Message = "Password changed"
-                });
+                return Ok(new ResponseModelBuilder().WithMessage("Senha alterada.")
+                                                    .WithSuccess(true)
+                                                    .Build());
             }
             catch (Exception ex)
             {

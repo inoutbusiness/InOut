@@ -2,12 +2,13 @@
 {
     public class AlreadyExistsException : Exception
     {
-        public AlreadyExistsException() { }
+        public AlreadyExistsException()
+        { }
 
-        public AlreadyExistsException(string message) 
+        public AlreadyExistsException(string message)
             : base(message) { }
 
-        public AlreadyExistsException(string message, Exception innerException) 
+        public AlreadyExistsException(string message, Exception innerException)
             : base(message, innerException) { }
     }
 }

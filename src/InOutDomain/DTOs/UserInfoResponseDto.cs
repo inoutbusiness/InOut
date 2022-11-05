@@ -8,6 +8,5 @@
         public string CpfCnpj { get; set; }
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
-
     }
 }

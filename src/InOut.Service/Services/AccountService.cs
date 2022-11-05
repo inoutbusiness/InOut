@@ -1,16 +1,16 @@
-﻿using EscNet.Cryptography.Interfaces;
+﻿using AutoMapper;
+using EscNet.Cryptography.Interfaces;
 using EscNet.Hashers.Interfaces.Algorithms;
 using InOut.Common;
-using AutoMapper;
 using InOut.Domain.DTOs;
 using InOut.Domain.Entities;
+using InOut.Domain.Exceptions;
 using InOut.Domain.Models.Auth;
 using InOut.Domain.Models.User;
 using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Services.Interfaces;
-using System.Transactions;
-using InOut.Domain.Exceptions;
 using Microsoft.Extensions.Configuration;
+using System.Transactions;
 
 namespace InOut.Service.Services
 {
@@ -22,9 +22,10 @@ namespace InOut.Service.Services
         private readonly IRijndaelCryptography _rijndaelCryptography;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly IPasswordRecoveryService _passwordRecoveryService;
 
-        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IArgon2IdHasher hasher, 
-                              IRijndaelCryptography rijndaelCryptography, IMapper mapper, IConfiguration configuration)
+        public AccountService(IAccountRepository accountRepository, IUserRepository userRepository, IArgon2IdHasher hasher,
+                              IRijndaelCryptography rijndaelCryptography, IMapper mapper, IConfiguration configuration, IPasswordRecoveryService passwordRecoveryService)
         {
             _accountRepository = accountRepository;
             _userRepository = userRepository;
@@ -32,6 +33,7 @@ namespace InOut.Service.Services
             _rijndaelCryptography = rijndaelCryptography;
             _mapper = mapper;
             _configuration = configuration;
+            _passwordRecoveryService = passwordRecoveryService;
         }
 
         public async Task<UserAccountModel> GetUserWithAccountByEmailAndPassword(string email, string password)
@@ -87,33 +89,53 @@ namespace InOut.Service.Services
             return userDto;
         }
 
-        public object CreateEmailSenderResetPasswordRequest(string emailTo)
-        {
-            return new
-            {
-                Subject = "InOut - Redefinição de Senha",
-                EmailFrom = _configuration["EmailSenderWithCodeConfig:EmailFrom"],
-                EmailTo = emailTo,
-                CodeConfig = new
-                {
-                    NumberDigits = _configuration["EmailSenderWithCodeConfig:CodeConfig:NumberDigits"],
-                    ExpirationTime = _configuration["EmailSenderWithCodeConfig:CodeConfig:ExpirationTime"]
-                },
-                AuthenticateInfo = new
-                {
-                    EmailAuth = _configuration["EmailSenderWithCodeConfig:AuthenticateInfo:EmailAuth"],
-                    PasswordAuth = _configuration["EmailSenderWithCodeConfig:AuthenticateInfo:PasswordAuth"]
-                }
-            };
-        }  
-
         public async Task ResetPassword(long accountId, string newPassword)
         {
+            var account = await _accountRepository.GetById(accountId);
+
+            if (account != null)
+            {
+                using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    await _accountRepository.ResetPassword(account, _hasher.Hash(newPassword));
+                    tc.Complete();
+                }
+
+                _passwordRecoveryService.RemoveFromCacheByEmail(account.Email);
+            }
+        }
+
+        public async Task<UserAccountModel> UpdateUserAccountInfo(UserAccountModel userAccountModel)
+        {
+            User? userInfo = null;
+
             using (var tc = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                await _accountRepository.ResetPassword(accountId, _hasher.Hash(newPassword));
+                var userUpdated = await _userRepository.GetUserByAccountId(userAccountModel.Id);
+
+                if (userUpdated == null)
+                    throw new Exception("Informações não encontradas para esta conta!");
+
+                userUpdated.BirthDate = userAccountModel.BirthDate;
+                userUpdated.CpfCnpj = userAccountModel.CpfCnpj;
+                userUpdated.FirstName = userAccountModel.FirstName;
+                userUpdated.LastName = userAccountModel.LastName;
+                userUpdated.Phone = userAccountModel.Phone;
+
+                userInfo = await _userRepository.Update(userUpdated);
+
                 tc.Complete();
             }
+
+            return new UserAccountModel()
+            {
+                Id = userInfo.Id.ToLong(),
+                FirstName = userInfo.FirstName,
+                LastName = userInfo.LastName,
+                BirthDate = userInfo.BirthDate,
+                Phone = userInfo.Phone,
+                CpfCnpj = userInfo.CpfCnpj,
+            };
         }
     }
 }

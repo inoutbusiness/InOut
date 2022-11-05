@@ -6,6 +6,7 @@ namespace InOut.Domain.Models.User
     {
         [JsonIgnore]
         public long Id { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CpfCnpj { get; set; }
