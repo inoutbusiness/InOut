@@ -27,13 +27,15 @@ namespace InOut.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("/api/v1/forgotPassword/sendResetPasswordCode")]
-        public async Task<IActionResult> SendEmailCodeResetPassword([FromBody] string emailTo)
+        public IActionResult SendEmailCodeResetPassword([FromBody] string emailTo)
         {
             try
             {
-                var responseData = await _passwordRecoveryService.SendRecoveryToken(emailTo);
+                _passwordRecoveryService.SendRecoveryToken(emailTo);
 
-                return Ok(responseData);
+                return Ok(new ResponseModelBuilder().WithMessage("O email será enviado em instantes.")
+                                                    .WithSuccess(true)
+                                                    .Build());
             }
             catch (HttpRequestException ex)
             {

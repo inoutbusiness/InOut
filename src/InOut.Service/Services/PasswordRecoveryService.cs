@@ -1,5 +1,7 @@
 ﻿using InOut.Domain.DTOs;
 using InOut.Domain.Exceptions;
+using InOut.Domain.Queues.Publishers;
+using InOut.Domain.Queues.Publishers.Interfaces;
 using InOut.Service.Cache.Interfaces;
 using InOut.Service.Services.Interfaces;
 using Newtonsoft.Json;
@@ -13,26 +15,21 @@ namespace InOut.Service.Services
         private const short TOKEN_SIZE = 6;
 
         private readonly ICacheManager _cacheManager;
+        private readonly IEmailSenderPublisher _emailSenderPublisher;
 
-        public PasswordRecoveryService(ICacheManager cacheManager)
+        public PasswordRecoveryService(ICacheManager cacheManager, IEmailSenderPublisher emailSenderPublisher)
         {
             _cacheManager = cacheManager;
+            _emailSenderPublisher = emailSenderPublisher;
         }
 
         #region Public Methods
 
-        public async Task<EmailSenderDto?> SendRecoveryToken(string emailTo) 
+        public void SendRecoveryToken(string emailTo) 
         {
-            EmailSenderDto? responseData;
             var request = CreateRecoveryTokenRequest(emailTo);
-
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsJsonAsync(@"https://localhost:7145/api/v1/emailSender/sendEmail", request);
-                responseData = JsonConvert.DeserializeObject<EmailSenderDto>(await response.Content.ReadAsStringAsync());
-            }
-
-            return responseData;
+            
+            _emailSenderPublisher.Publish(JsonConvert.SerializeObject(request));
         }
 
         public void ValidateInputedToken(string email, string inputedToken)
@@ -68,13 +65,13 @@ namespace InOut.Service.Services
             return new EmailSenderRequest
             {
                 Subject = "InOut - Redefinição de Senha",
-                EmailFrom = "molinari.arthureduardo@gmail.com",
+                EmailFrom = "inout.empresa@gmail.com",
                 EmailTo = emailTo,
                 RecoveryToken = token,
                 AuthenticateInfo = new EmailAuthenticateInfoDto
                 {
-                    EmailAuth = "molinari.arthureduardo@gmail.com",
-                    PasswordAuth = ""
+                    EmailAuth = "inout.empresa@gmail.com",
+                    PasswordAuth = "tzooaunmwuqfhlcr"
                 }
             };
         }

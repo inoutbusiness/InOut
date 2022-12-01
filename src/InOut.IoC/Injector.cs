@@ -1,4 +1,6 @@
-﻿using InOut.Infrastructure.Repositories;
+﻿using InOut.Domain.Queues.Publishers;
+using InOut.Domain.Queues.Publishers.Interfaces;
+using InOut.Infrastructure.Repositories;
 using InOut.Infrastructure.Repositories.Interfaces;
 using InOut.Service.Cache;
 using InOut.Service.Cache.Interfaces;
@@ -47,6 +49,7 @@ namespace InOut.IoC
         {
             serviceColletion.AddScoped<ITokenGenerator, TokenGenerator>();
             serviceColletion.AddScoped<ICacheManager, CacheManager>();
+            serviceColletion.AddScoped<IEmailSenderPublisher, EmailSenderPublisher>();
             serviceColletion.AddSingleton(MappingProfile.CreateMappingProfile().CreateMapper());
         }
     }
