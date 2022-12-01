@@ -4,7 +4,7 @@ namespace InOut.Service.Services.Interfaces
 {
     public interface IPasswordRecoveryService
     {
-        Task<EmailSenderDto?> SendRecoveryToken(string emailTo);
+        void SendRecoveryToken(string emailTo);
 
         void ValidateInputedToken(string email, string inputedToken);
 
