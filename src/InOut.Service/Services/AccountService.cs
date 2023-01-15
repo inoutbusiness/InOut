@@ -81,7 +81,7 @@ namespace InOut.Service.Services
                     BranchId = signUpModel.BranchId,
                 };
 
-                var createdUser = await _userRepository.Create(user);
+                var createdUser = _userRepository.Create(user);
                 tc.Complete();
 
                 userDto = _mapper.Map<UserDto>(createdUser);
@@ -91,7 +91,7 @@ namespace InOut.Service.Services
 
         public async Task ResetPassword(long accountId, string newPassword)
         {
-            var account = await _accountRepository.GetById(accountId);
+            var account = _accountRepository.GetById(accountId);
 
             if (account != null)
             {
@@ -122,7 +122,7 @@ namespace InOut.Service.Services
                 userUpdated.LastName = userAccountModel.LastName;
                 userUpdated.Phone = userAccountModel.Phone;
 
-                userInfo = await _userRepository.Update(userUpdated);
+                userInfo = _userRepository.Update(userUpdated);
 
                 tc.Complete();
             }

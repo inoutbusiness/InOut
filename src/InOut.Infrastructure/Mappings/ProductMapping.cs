@@ -23,11 +23,6 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("VARCHAR(220)")
                 .HasMaxLength(220);
 
-            builder.Property(x => x.Brand)
-                .HasColumnName("Brand")
-                .HasColumnType("VARCHAR(50)")
-                .HasMaxLength(50);
-
             builder.Property(x => x.UnitPrice)
                 .IsRequired()
                 .HasColumnName("UnitPrice")
@@ -40,17 +35,11 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("SMALLINT")
                 .HasMaxLength(120);
 
-            builder.Property(x => x.Quantity)
-                .IsRequired()
-                .HasColumnName("Quantity")
-                .HasColumnType("DECIMAL(10, 2)")
-                .HasMaxLength(120);
-
             builder.Property(x => x.Code)
                 .IsRequired()
                 .HasColumnName("Code")
-                .HasColumnType("VARCHAR(15)")
-                .HasMaxLength(15);
+                .HasColumnType("VARCHAR(50)")
+                .HasMaxLength(50);
 
             builder.Property(x => x.Description)
                 .IsRequired()

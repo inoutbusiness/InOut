@@ -9,6 +9,7 @@ namespace InOut.IoC
         public MappingProfile()
         {
             CreateMap<User, UserDto>();
+            CreateMap<Product, ProductDto>();
         }
 
         public static MapperConfiguration CreateMappingProfile()

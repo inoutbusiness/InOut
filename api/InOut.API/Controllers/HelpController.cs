@@ -14,11 +14,17 @@ namespace InOut.API.Controllers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IRijndaelCryptography _rijndaelCryptography;
+        private readonly IUserRepository _userRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IBrandRepository _brandRepository;
 
-        public HelpController(IAccountRepository accountRepository, IRijndaelCryptography rijndaelCryptography)
+        public HelpController(IAccountRepository accountRepository, IRijndaelCryptography rijndaelCryptography, IUserRepository userRepository, IProductRepository productRepository, IBrandRepository brandRepository)
         {
             _accountRepository = accountRepository;
             _rijndaelCryptography = rijndaelCryptography;
+            _userRepository = userRepository;
+            _productRepository = productRepository;
+            _brandRepository = brandRepository;
         }
 
         [HttpPost]
@@ -37,6 +43,58 @@ namespace InOut.API.Controllers
 
             return BadRequest(new ResponseModelBuilder().WithMessage("Account Id not found")
                                                         .Build());
+        }
+
+        // METODO ABAIXO FEITO SOMENTE PARA TESTES
+        [HttpGet]
+        [Route("/api/v1/helper/getAllUsersInfo")]
+        public async Task<IActionResult> GetAllUsersInfo()
+        {
+            try
+            {
+                var users = _userRepository.GetAllAsNoTracking();
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModelBuilder().WithMessage("Users not found")
+                                                            .Build());
+            }
+        }
+
+        [HttpGet]
+        [Route("/api/v1/helper/getAllProductsInfo")]
+        public async Task<IActionResult> GetAllProductsInfo()
+        {
+            try
+            {
+                var products = _productRepository.GetAllAsNoTracking();
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModelBuilder().WithMessage("Products not found")
+                                                            .Build());
+            }
+        }
+
+        [HttpGet]
+        [Route("/api/v1/helper/getAllBrandsInfo")]
+        public async Task<IActionResult> GetAllBrandInfo()
+        {
+            try
+            {
+                var brands = _brandRepository.GetAllAsNoTracking();
+
+                return Ok(brands);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseModelBuilder().WithMessage("Brands not found")
+                                                            .Build());
+            }
         }
     }
 }

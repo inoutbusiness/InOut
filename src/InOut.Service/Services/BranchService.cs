@@ -33,7 +33,7 @@ namespace InOut.Service.Services
                 branch.Cnpj = branchModel.Cnpj;
                 branch.LocationId = branchModel.LocationId;
 
-                var createdBranch = await _branchRepository.Create(branch);
+                var createdBranch = _branchRepository.Create(branch);
 
                 branchDto = _mapper.Map<BranchDto>(createdBranch);
                 tc.Complete();

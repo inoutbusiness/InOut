@@ -7,5 +7,6 @@
         Kilo,
         Gram,
         Unit,
+        Others
     }
 }

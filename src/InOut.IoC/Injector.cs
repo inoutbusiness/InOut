@@ -28,6 +28,7 @@ namespace InOut.IoC
             serviceColletion.AddScoped<IProductRepository, ProductRepository>();
             serviceColletion.AddScoped<IProviderRepository, ProviderRepository>();
             serviceColletion.AddScoped<IUserRepository, UserRepository>();
+            serviceColletion.AddScoped<IBrandRepository, BrandRepository>();
         }
 
         private static void InjectServices(IServiceCollection serviceColletion)
@@ -41,6 +42,7 @@ namespace InOut.IoC
             serviceColletion.AddScoped<IUserService, UserService>();
             serviceColletion.AddScoped<IUserAccountService, UserAccountService>();
             serviceColletion.AddScoped<IPasswordRecoveryService, PasswordRecoveryService>();
+            serviceColletion.AddScoped<IBrandService, BrandService>();
         }
 
         private static void InjectGenerics(IServiceCollection serviceColletion)

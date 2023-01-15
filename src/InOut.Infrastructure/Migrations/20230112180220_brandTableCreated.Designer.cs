@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20230112180220_brandTableCreated")]
+    partial class brandTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,8 +248,8 @@ namespace InOut.Infrastructure.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)")
+                        .HasMaxLength(15)
+                        .HasColumnType("VARCHAR(15)")
                         .HasColumnName("Code");
 
                     b.Property<short>("Color")
@@ -269,6 +271,11 @@ namespace InOut.Infrastructure.Migrations
                         .HasMaxLength(220)
                         .HasColumnType("VARCHAR(220)")
                         .HasColumnName("Name");
+
+                    b.Property<decimal>("Quantity")
+                        .HasMaxLength(120)
+                        .HasColumnType("DECIMAL(10,2)")
+                        .HasColumnName("Quantity");
 
                     b.Property<short>("Type")
                         .HasMaxLength(120)

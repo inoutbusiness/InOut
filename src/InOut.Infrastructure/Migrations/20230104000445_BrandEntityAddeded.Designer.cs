@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20230104000445_BrandEntityAddeded")]
+    partial class BrandEntityAddeded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,24 +84,21 @@ namespace InOut.Infrastructure.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("BIGINT");
+                        .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<byte[]>("Logo")
                         .IsRequired()
-                        .HasColumnType("image")
-                        .HasColumnName("Logo");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)")
-                        .HasColumnName("Name");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brand");
                 });
 
             modelBuilder.Entity("InOut.Domain.Entities.Business", b =>
@@ -242,12 +241,12 @@ namespace InOut.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<long>("BrandId")
-                        .HasColumnType("BIGINT");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("VARCHAR(50)")
+                        .HasMaxLength(15)
+                        .HasColumnType("VARCHAR(15)")
                         .HasColumnName("Code");
 
                     b.Property<short>("Color")
@@ -269,6 +268,11 @@ namespace InOut.Infrastructure.Migrations
                         .HasMaxLength(220)
                         .HasColumnType("VARCHAR(220)")
                         .HasColumnName("Name");
+
+                    b.Property<decimal>("Quantity")
+                        .HasMaxLength(120)
+                        .HasColumnType("DECIMAL(10,2)")
+                        .HasColumnName("Quantity");
 
                     b.Property<short>("Type")
                         .HasMaxLength(120)
