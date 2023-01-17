@@ -13,12 +13,6 @@ namespace InOut.Domain.Validators
                 .NotEmpty()
                 .WithMessage("O nome do produto não pode ser vazio");
 
-            RuleFor(x => x.Brand)
-                .NotNull()
-                .WithMessage("A marca do produto não pode ser nula")
-                .NotEmpty()
-                .WithMessage("A marca do produto não pode ser vazia");
-
             RuleFor(x => x.UnitPrice)
                 .NotNull()
                 .WithMessage("O preço unitário do produto não pode ser nulo")
@@ -30,12 +24,6 @@ namespace InOut.Domain.Validators
                 .WithMessage("A cor do produto não pode ser nula")
                 .NotEmpty()
                 .WithMessage("A cor do produto não pode ser vazia");
-
-            RuleFor(x => x.Quantity)
-                .NotNull()
-                .WithMessage("A quantidade do produto não pode ser nula")
-                .Must(value => value > 0)
-                .WithMessage("A quantidade do produto deve ser maior que 0");
 
             RuleFor(x => x.Code)
                 .NotNull()

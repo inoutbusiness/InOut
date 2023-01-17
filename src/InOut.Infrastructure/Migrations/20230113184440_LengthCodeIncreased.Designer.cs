@@ -4,6 +4,7 @@ using InOut.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InOut.Infrastructure.Migrations
 {
     [DbContext(typeof(InOutContext))]
-    partial class InOutContextModelSnapshot : ModelSnapshot
+    [Migration("20230113184440_LengthCodeIncreased")]
+    partial class LengthCodeIncreased
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,6 +271,11 @@ namespace InOut.Infrastructure.Migrations
                         .HasMaxLength(220)
                         .HasColumnType("VARCHAR(220)")
                         .HasColumnName("Name");
+
+                    b.Property<decimal>("Quantity")
+                        .HasMaxLength(120)
+                        .HasColumnType("DECIMAL(10,2)")
+                        .HasColumnName("Quantity");
 
                     b.Property<short>("Type")
                         .HasMaxLength(120)

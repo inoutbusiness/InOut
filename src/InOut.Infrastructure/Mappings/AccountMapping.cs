@@ -29,7 +29,7 @@ namespace InOut.Infrastructure.Mappings
                 .HasColumnType("VARCHAR(255)")
                 .HasMaxLength(255);
 
-            builder.HasOne<User>(a => a.User)
+            builder.HasOne(a => a.User)
                 .WithOne(b => b.Account)
                 .HasForeignKey<User>(b => b.AccountId);
         }

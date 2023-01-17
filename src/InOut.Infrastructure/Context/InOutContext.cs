@@ -15,6 +15,7 @@ namespace InOut.Infrastructure.Context
         { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -39,6 +40,7 @@ namespace InOut.Infrastructure.Context
             modelBuilder.ApplyConfiguration(new ProviderMapping());
             modelBuilder.ApplyConfiguration(new UserMovementMapping());
             modelBuilder.ApplyConfiguration(new ProductProviderMapping());
+            modelBuilder.ApplyConfiguration(new BrandMapping());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -2,8 +2,12 @@
 {
     public enum EColor
     {
+        Yellow,
         Red,
+        Purple,
+        Blue,
         Green,
-        Blue
+        White,
+        Black
     }
 }

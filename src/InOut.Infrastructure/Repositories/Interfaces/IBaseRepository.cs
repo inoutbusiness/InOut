@@ -4,14 +4,22 @@ namespace InOut.Infrastructure.Repositories.Interfaces
 {
     public interface IBaseRepository<T> where T : Base
     {
-        Task<T> Create(T obj);
+        T Create(T obj);
+        Task<T> CreateAsync(T obj);
 
-        Task<T?> GetById(long id);
+        T? GetById(long id);
+        Task<T?> GetByIdAsync(long id);
 
-        Task<IEnumerable<T?>> GetAll();
+        IEnumerable<T?> GetAll();
+        Task<IEnumerable<T?>> GetAllAsync();
 
-        Task<T> Update(T obj);
+        IEnumerable<T?> GetAllAsNoTracking();
+        Task<IEnumerable<T?>> GetAllAsNoTrackingAsync();
 
-        Task Delete(long id);
+        T Update(T obj);
+        Task<T> UpdateAsync(T obj);
+
+        void Delete(long id);
+        Task DeleteAsync(long id);
     }
 }

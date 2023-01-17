@@ -4,5 +4,8 @@
     {
         Food,
         Clothes,
+        Eletronics,
+        Books,
+        Others
     }
 }

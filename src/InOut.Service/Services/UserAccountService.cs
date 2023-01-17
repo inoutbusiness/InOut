@@ -33,7 +33,7 @@ namespace InOut.Service.Services
                 userUpdated.LastName = userAccountModel.LastName;
                 userUpdated.Phone = userAccountModel.Phone;
 
-                userInfo = await _userRepository.Update(userUpdated);
+                userInfo = _userRepository.Update(userUpdated);
 
                 tc.Complete();
             }
